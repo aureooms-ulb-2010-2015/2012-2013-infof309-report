@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Rapport01.aux
+The style file: apalike.bst
+Database file #1: biblio.bib
+Warning--there's a number but no volume in p
+Warning--empty year in g
+Warning--empty year in d
+Warning--empty year in l
+Warning--empty year in f
+Warning--there's a number but no series in n
+Warning--empty year in c
+Warning--empty year in e
+Warning--empty year in k
+You've used 16 entries,
+            1935 wiz_defined-function locations,
+            546 strings with 6019 characters,
+and the built_in function-call counts, 5633 in all, are:
+= -- 538
+> -- 260
+< -- 8
++ -- 88
+- -- 86
+* -- 436
+:= -- 1032
+add.period$ -- 49
+call.type$ -- 16
+change.case$ -- 122
+chr.to.int$ -- 16
+cite$ -- 25
+duplicate$ -- 221
+empty$ -- 359
+format.name$ -- 108
+if$ -- 1069
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 17
+newline$ -- 83
+num.names$ -- 48
+pop$ -- 129
+preamble$ -- 1
+purify$ -- 123
+quote$ -- 0
+skip$ -- 161
+stack$ -- 0
+substring$ -- 276
+swap$ -- 26
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 94
+warning$ -- 9
+while$ -- 39
+width$ -- 0
+write$ -- 191
+(There were 9 warnings)
