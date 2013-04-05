@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.1.26)  2 APR 2013 17:25
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.1.26)  5 APR 2013 13:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,142 +530,183 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 3.
-)
+ [1
+
+])
 \tf@toc=\write3
 \openout3 = `Rapport01.toc'.
 
- [1
-
-]
+ [2]
 Chapitre 1.
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
-File: uni-32.def 2012/04/20 UCS: Unicode data U+2000..U+20FF
-)
-Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+Overfull \hbox (12.51807pt too wide) in paragraph at lines 53--54
+[]\T1/cmr/m/n/12 L'usage de procédés au-toma-tisés per-met le fil-trage et l'-a
+nal-yse mas-sive de don-nées jusqu'alors
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--66
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
 
-[2
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
+
+ []
+
+[3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
 
  []
 
+<figureImageMatrice.png, id=25, 409.09982pt x 160.67169pt>
+File: figureImageMatrice.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--81
+<use figureImageMatrice.png>
+Package pdftex.def Info: figureImageMatrice.png used on input line 72.
+(pdftex.def)             Requested size: 409.09882pt x 160.6713pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 
  []
 
+[4 <./figureImageMatrice.png>]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 93.
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--85
-
- []
-
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 86.
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
+Underfull \hbox (badness 10000) in paragraph at lines 101--103
+
+ []
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 86.
+(Font)              <7> on input line 104.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 86.
- [3]
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+(Font)              <5> on input line 104.
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
  []
 
-[4] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 File: uni-1.def 2012/04/20 UCS: Unicode data U+0100..U+01FF
-) [5]
+) [6]
 Chapitre 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--160
+Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+Underfull \hbox (badness 10000) in paragraph at lines 187--188
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
 
  []
 
-[6
+[7
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 186--187
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
 
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
 
  []
 
-<figureDetectionDiscontinuities.png, id=48, 570.41678pt x 147.12108pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
+
+ []
+
+<figureDetectionDiscontinuities.png, id=56, 570.41678pt x 147.12108pt>
 File: figureDetectionDiscontinuities.png Graphic file (type png)
 
 <use figureDetectionDiscontinuities.png>
 Package pdftex.def Info: figureDetectionDiscontinuities.png used on input line 
-220.
+241.
 (pdftex.def)             Requested size: 342.2527pt x 88.27332pt.
- [8 <./figureDetectionDiscontinuities.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+ [9 <./figureDetectionDiscontinuities.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 238--239
+Underfull \hbox (badness 10000) in paragraph at lines 256--257
 
  []
 
-[9]
+
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--265
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
+
+ []
+
+[11] [12]
 Chapitre 3.
-<figurePredictionObservationCycle.png, id=58, 367.15741pt x 145.83054pt>
+<figurePredictionObservationCycle.png, id=71, 367.15741pt x 145.83054pt>
 File: figurePredictionObservationCycle.png Graphic file (type png)
 
 <use figurePredictionObservationCycle.png>
 Package pdftex.def Info: figurePredictionObservationCycle.png used on input lin
-e 274.
+e 326.
 (pdftex.def)             Requested size: 183.57825pt x 72.91508pt.
- [10
+ [13
 
  <./figurePredictionObservationCycle.png>]
-Overfull \hbox (10.56595pt too wide) in paragraph at lines 300--304
+Overfull \hbox (10.56595pt too wide) in paragraph at lines 352--356
 \T1/cmr/m/n/12 La den-sité \T1/cmr/m/it/12 a pri-ori $\OML/cmm/m/it/12 P\OT1/cm
 r/m/n/12 (\OT1/cmr/bx/n/12 x[]\OMS/cmsy/m/n/12 jZ[]\OT1/cmr/m/n/12 )$ \T1/cmr/m
 /n/12 est une pré-dic-tion is-sue de la den-sité \T1/cmr/m/it/12 a pos-te-ri-or
@@ -673,19 +714,22 @@ i $\OML/cmm/m/it/12 P\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 x[]\OMS/cmsy/m/n/12 jZ[]
 \OT1/cmr/m/n/12 )$
  []
 
-[11] [12]
+[14] [15]
 Chapitre 4.
-[13
+[16
 
 ]
 Chapitre 5.
-[14
+[17
 
 ]
 Chapitre 6.
-(./Rapport01.bbl [15
+(./Rapport01.bbl [18
 
 ]
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
+File: uni-32.def 2012/04/20 UCS: Unicode data U+2000..U+20FF
+)
 Underfull \hbox (badness 10000) in paragraph at lines 20--24
 []\T1/cmr/m/n/12 Fontaine, E., Barr, A., and Bur-dick, J.  Track-ing of
  []
@@ -708,43 +752,44 @@ Underfull \hbox (badness 1062) in paragraph at lines 57--62
 \T1/cmr/m/it/12 http ://www.cvl.iis.u-
  []
 
-[16
+[19
 
-]) [17] (./Rapport01.aux) ) 
+]) [20] (./Rapport01.aux) ) 
 Here is how much of TeX's memory you used:
- 5396 strings out of 495059
- 68863 string characters out of 3182030
+ 5403 strings out of 495059
+ 69014 string characters out of 3182030
  136061 words of memory out of 3000000
- 8475 multiletter control sequences out of 15000+200000
- 18744 words of font info for 42 fonts, out of 3000000 for 9000
+ 8480 multiletter control sequences out of 15000+200000
+ 19057 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,8n,35p,1152b,595s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen
-/ec/eccc1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt
-1000.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600
+/ec/ectt1000.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt
+1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600
 pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1440.600pk> </ho
 me/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/ghost
-bot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/ghostbot/.tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/ghostbot/.texmf-var/f
-onts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecbx2488.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecbx1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecbx1440.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1
-440.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600p
-k> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </hom
-e/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecxc1200.600pk></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb>
-Output written on Rapport01.pdf (18 pages, 306077 bytes).
+bot/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/ghostbot/.tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/ghostbot/.texmf-var/f
+onts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecrm1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecbx2488.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/
+ec/ecbx1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1
+440.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600p
+k> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> </hom
+e/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/ghostb
+ot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecxc1200.600pk></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb>
+Output written on Rapport01.pdf (21 pages, 357943 bytes).
 PDF statistics:
- 650 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
+ 690 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
