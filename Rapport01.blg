@@ -8,6 +8,11 @@ I was expecting a `,' or a `}'---line 129 of file biblio.bib
  :   publisher = "The Plessey Company plc."
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 137 of file biblio.bib
+ :   
+ :   publisher = "École des Mines de Paris "
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in p
 Warning--empty year in g
 Warning--empty year in d
@@ -17,45 +22,45 @@ Warning--there's a number but no series in n
 Warning--empty year in c
 Warning--empty year in e
 Warning--empty year in k
-You've used 17 entries,
+You've used 18 entries,
             1935 wiz_defined-function locations,
-            552 strings with 6111 characters,
-and the built_in function-call counts, 6097 in all, are:
-= -- 588
-> -- 268
-< -- 11
-+ -- 92
-- -- 88
-* -- 465
-:= -- 1099
-add.period$ -- 52
-call.type$ -- 17
-change.case$ -- 128
-chr.to.int$ -- 17
-cite$ -- 26
-duplicate$ -- 244
-empty$ -- 394
-format.name$ -- 115
-if$ -- 1174
+            557 strings with 6264 characters,
+and the built_in function-call counts, 6367 in all, are:
+= -- 614
+> -- 275
+< -- 12
++ -- 94
+- -- 90
+* -- 482
+:= -- 1151
+add.period$ -- 55
+call.type$ -- 18
+change.case$ -- 134
+chr.to.int$ -- 18
+cite$ -- 27
+duplicate$ -- 257
+empty$ -- 414
+format.name$ -- 118
+if$ -- 1225
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 18
-newline$ -- 88
-num.names$ -- 51
-pop$ -- 133
+missing$ -- 19
+newline$ -- 93
+num.names$ -- 54
+pop$ -- 138
 preamble$ -- 1
-purify$ -- 129
+purify$ -- 135
 quote$ -- 0
-skip$ -- 185
+skip$ -- 196
 stack$ -- 0
-substring$ -- 318
-swap$ -- 36
+substring$ -- 330
+swap$ -- 37
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 100
+type$ -- 106
 warning$ -- 9
-while$ -- 43
+while$ -- 45
 width$ -- 0
-write$ -- 204
-(There was 1 error message)
+write$ -- 216
+(There were 2 error messages)

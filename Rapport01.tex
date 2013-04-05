@@ -309,7 +309,7 @@ Cette étape met en place un système de représentation des données en vue de 
 
 Le choix de ces traits est laissé libre, ils seront choisis relativement à la façon dont sera entrevue l'analyse des données. Par contre il est impératif que les traits caractéristiques forment des descripteur insensibles aux variations géométriques (homothétie, translation, rotation) ou photométriques (intensité).   
 \subsection{Good feature to track}
-Les «bons» traits à suivre sont ceux dont le mouvement peut être estimé de manière fiable.
+Les «bons» traits à suivre sont ceux dont le mouvement peut être estimé de manière fiable.\\
 
 J. Shi et C. Tomasi ont présenté\footnote{IEEE Conference on Computer Vision and Pattern Recognition (CVPR94) Seattle, June 1994} en 1994 leurs travaux sous l'intitulé \textit{Good Feature to Track}, l'article fait toujours autorité sur le sujet. 
 
@@ -319,10 +319,12 @@ Ils proposent alors un critère de sélection de traits intéressants qu'ils pr�
 
 Du constat qu'il n'existe de traits robustes à toutes épreuves et que même les bons traits peuvent se retrouver caché derrière un obstacle, cet article explique comment contrôler la qualité des traits caractéristiques de l'image.
 
-Ce contrôle s'effectue pendant l'opération de suivi de la cible, par évaluation de la \textit{dissemblance}. La fonction de dissemblance, définie comme moyenne quadratique des traits, dont le rôle est la quantification du changement d'apparence d'un trait entre l'image originale et l'image actuelle. Lorsque la dissemblance devient trop importante, le trait est abandonné.
+Ce contrôle s'effectue pendant l'opération de suivi de la cible, par évaluation de la \textit{dissemblance}. 
+
+La fonction de dissemblance, définie comme moyenne quadratique des traits, a pour rôle la quantification du changement d'apparence d'un trait entre l'image originale et l'image actuelle. Lorsque la dissemblance devient trop importante, le trait est abandonné.\\
 
 
-Hypothèses concernant les traits intéressant à suivre:
+Hypothèses concernant les traits intéressants à suivre:
 \begin{itemize}
 \item Luminosité constante: la projection d'un point conserve son apparence d'une frame à la suivante.
 \item Mouvement court: un point ne bouge de beaucoup.
@@ -334,7 +336,7 @@ Un coin est un point intersection d'au moins deux arêtes de sens opposé.\\
 
 Le \textit{Harris corner detector} est une méthode de détection de coins (traits d'intérêt) reconnu pour sa relative robustesse face aux bruits, aux variations de luminosité et aux variations géométriques. \\
 
-l'algorithme, décrit par Harris et Stephens, fonctionne sur l'évaluation d'une fonction d'\textit{auto-corrélation} appliquée localement. 
+L'algorithme, décrit par Harris et Stephens, fonctionne sur l'évaluation d'une fonction d'\textit{auto-corrélation} appliquée localement. 
 En mathématique, l'auto-corrélation c'est corrélation croisée du signal par lui-même, cela permet de détecter des régularités, des motifs répétés au sein d'un signal.   
 
 La fonction d'auto-corrélation, décrite par \cite{q} comme l'erreur quadratique moyenne (\textit{sum of squared differences}), mesure les changements locaux dûs à l'application d'un léger décalage dans chaque direction.\\
@@ -350,6 +352,27 @@ où
 \end{itemize}
 
 \subsection{Flux Optique}
+
+Une caméra filme des objets en mouvement dans un espace à trois dimensions, leur mouvement relatif est un champ de vecteurs à trois composantes. 
+
+La scène filmée est projetée sur le plan, en deux dimensions, du flux vidéo. Dès lors, il est possible de définir un champ de vecteurs, le \textit{champ de vitesses projeté} \cite{r}. \\
+
+Tout point $\textbf{X}$, réel filmé, possède un point $x$ d'une image dans le flux vidéo qui est le \textit{projeté} $p(\textbf{X})$ de vitesse $\textbf{V}$. 
+
+Le flux optique est le vecteur $\vec v = dp(\textbf{X})\textbf{V}$.\\
+ 
+L'estimation du mouvement est effectuée à partir de variations temporelles des intensités (niveau de gris) dans le flux d'images. Pour obtenir analytiquement le flux optique, on fait l'hypothèse que chaque point filmé a une intensité constante. On peut alors écrire cette dérivée comme $$\frac{d}{dt}I(t,x(t)) \equiv \frac{\partial I}{\partial x}V_x+\frac{\partial I}{\partial y}V_y+\frac{\partial I}{\partial t} \equiv \vec v \cdot \nabla I + \frac{\partial I}{\partial t}$$
+où 
+\begin{itemize}
+\item[] $I(t,x,y)$ est une image en niveau de gris.\\
+\end{itemize}
+On a, sous l'hypothèse d'intensité constante, l'équation dite du \textit{flux optique}:
+$$\vec v \cdot \nabla I + \frac{\partial I}{\partial t} = 0 $$ 
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.4]{figureOpticalConstraint.png}
+\caption{Contrainte du flux optique}
+\end{figure}
 
 \section{Analyses}
 \subsection{Matcher}

@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[Bernard, 1999]{r}
+Bernard, C. (1999).
+\newblock Ondelettes et problèmes mal posés : la mesure du flot optique et
+  l’interpolation irrégulière.
+\newblock {\em Thèse de l'École Polytechnique}.
+
 \bibitem[Canny, 1986]{p}
 Canny, J. (1986).
 \newblock A computational approach to edge detection.
