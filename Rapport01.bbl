@@ -27,6 +27,11 @@ Gyaourova, A., Kamath, C., and Cheung, S.-C. (2003).
 \newblock Block matching for object tracking.
 \newblock {\em Lawrence LiverMore National Laboratory}.
 
+\bibitem[Harris and Stephens, 1988]{q}
+Harris, C. and Stephens, M. (1988).
+\newblock A combined corner and edge detector.
+\newblock {\em Proceedings of the 4th Alvey Vision Conference}, pages 147--151.
+
 \bibitem[Jain et~al., 1996]{h}
 Jain, A., IEEE, F., Zhong, Y., and Lakshmanan, S. (1996).
 \newblock Object matching using deformable templates.
@@ -37,8 +42,8 @@ Kim, Y.~M.
 \newblock Object tracking in a video sequence, cs 229 final project report.
 \newblock {\em CS 229, Stanford University}.
 
-\bibitem[MAHEO et~al., ]{f}
-MAHEO, A.-C., Colas, R.~M., and de~vision, L.
+\bibitem[Maheo and Colas, ]{f}
+Maheo, A.-C. and Colas, R.~M.
 \newblock Méthodes de suivi d’un objet en mouvement sur une vidéo.
 \newblock {\em Département d’ingénierie et des sciences informatiques,
   Institut Supérieur de l’Électronique et du Numérique}.

@@ -85,14 +85,27 @@ Deux problématiques fortement liées peuvent être dégagées\footnote{Video Tr
 	L'approche qui semble la plus évidente pour cerner une cible en mouvement est sa différenciation avec ce qui apparait comme statique. 
 	
 	On supposera les objets d'intérêt et mouvant, comme appartenant à l'avant-plan (\textit{foreground}) et le reste, statique, comme appartenant au fond (\textit{background}). On parlera alors de \textit{soustraction du fond}.
-	
+
+\[F(\lambda_t) = \lambda_t - B_t\]	
+où,
+\begin{itemize}
+\item[] $\lambda_t$ est une frame à l'instant $t$
+\item[] Le \textit{foreground}: $F(\lambda_t)$ 
+\item[] La \textit{background}, la matrice $B_t$\\
+\end{itemize}
+
 	La soustraction du fond peut se réaliser de différentes manières, mais elle doit pouvoir résister aux changements de luminosité, aux bruits et aux différentes variations de vitesse.
 	De façon générale, l'extraction s'obtient en soustrayant de l'image courante une image de "référence", le fond.
 	L'image de référence est actualisé à chaque étape, par accumulation pondérée et relativement à l'avant-plan extrait:
 	
 	$$\texttt{dst}(x,y)  \leftarrow (1- \alpha )  \cdot \texttt{dst}(x,y)+\alpha \cdot \texttt{src}(x,y)$$
 	$$\texttt{if} \quad \texttt{mask} (x,y)  \ne 0$$
-	$\alpha$ est le \textit{facteur d'oubli}. 
+	où,	
+	\begin{itemize}
+	\item[] $\alpha$ est le \textit{facteur d'oubli}
+	\item[] $\texttt{dst}(x,y)$ est le pixels de destination et $\texttt{src}(x,y)$ celui de l'image source.
+	\item[] $\texttt{mask} (x,y)$ est une image binaire générée à partir de l'avant-plan extrait en $t-1$.
+	\end{itemize}
 	
 	
 	
@@ -101,7 +114,32 @@ Deux problématiques fortement liées peuvent être dégagées\footnote{Video Tr
 	Le mouvement est caractérisé par une position d'origine (vecteur position), une direction (orientation vers un point de destination relativement a un référentiel) et une vitesse (obtenu en dérivant les coordonnées par rapport au temps).	
 	L'enjeu est de parvenir déterminer que la position d'une cible à un instant $t$ est la résultante d'un mouvement, de cette même cible, initié en $t-1$.\\
 	
-	Plusieurs approches sont envisageables, la plus courante s'appuyant sur le concept de flux optique dont l'introduction est attribuée au psychologue James J. Gibson\footnote{\url{http://fr.wikipedia.org/wiki/Flux_optique}} . 
+	Plusieurs approche sont envisageables, notamment la définition du mouvement d'image de J.Shi et C.Tomasi .
+	
+	Le \textit{mouvement d'image}:
+	$$I(x,y,t+\tau)=I(x-\xi(x,y,t,\tau),y-\eta(x,y,t,\tau))$$
+	où
+	\begin{itemize}
+	\item[] $I_{t+\tau}$ est une image obtenue à partir d'un déplacement des points à l'instant $t$.
+	\item[] Le vecteur de \textit{déplacement} $\delta = (\xi,\eta)$ est la quantité de mouvement. On perçoit l'insuffisance de la définition du déplacement $\delta$ quant aux multiples déplacements internes à la cible.\\
+	\end{itemize}
+	Le déplacement comme \textit{champs de mouvement affine}:
+	$$\delta = D\texttt{x}+\texttt{d}$$
+	où
+	$D$ est la matrice de déformation et $d$ une translation sont donné comme:
+	$$ D = \left( 
+		\begin{array}{cc}
+		d_{xx} & d_{xy} \\
+		d_{yx} & d_{yy} \\ 
+		\end{array} 
+		   \right)
+	$$
+	Ce qui permet de poser pour un point $x$, centre d'une région d'intérêt de l'image $J_t$ son mouvement équivaudra au point $Ax + \texttt{d}$ de l'image suivante $J_{t+\tau}$, où $A = I + \texttt{D}$ et $I$ est la matrice identité donnée par:$$J_{t+\tau}(Ax + \texttt{d}) = J_t(x)$$\\
+	La prédiction du mouvement sera donnée par l'estimation des paramètres de la matrice $D$ et du vecteur de déplacement $\texttt{d}$.\\
+	
+	
+	
+	Un autre approche plus courante est celle s'appuyant sur le concept de flux optique dont l'introduction est attribuée au psychologue James J. Gibson\footnote{\url{http://fr.wikipedia.org/wiki/Flux_optique}} . 
 	
 	Le flux optique (\textit{Optical Flow}) est décrit comme le modèle sous-jacent au mouvement visible d'un objet dans son contexte et relativement à l'observateur. Ce mouvement peut être estimé à partir d'une séquence d'images comme une suite de vitesses instantanées ou de déplacements discrets d'images.\\ 
 	
@@ -128,14 +166,16 @@ D'une image à l'autre, on doit pouvoir s'appuyer sur des critères robustes à 
 
 Il faut trouver des caractéristiques présentant des propriétés locales remarquables, c'est-à-dire des traits d'intérêts, stables ou \textit{invariants}, on parlera de \textit{features} de la cible.
 
-Il existe diverses méthodes de détection de zones d'intérêts, chacune relative aux types de zones d'intérêts sur lesquels on souhaite baser l'analyse de la cible. Citons parmi les plus connu, l'algorithme de détection de coins de C. Harris et M. Stephens ou encore celui de J. Shi et C. Tomasi, mais aussi l'algorithme de détection de contours, \textit{Canny edge detection}, présenté par l'australien J. Canny en 1986.\\
+Il existe diverses méthodes de détection de zones d'intérêts, chacune relative aux types de zones d'intérêts sur lesquels on souhaite baser l'analyse de la cible. Citons parmi les plus connu, l'algorithme de détection de coins de C. Harris et M. Stephens ou encore celui de J. Shi et C. Tomasi sur l'estimation qualitative des traits d'intérêts, mais aussi l'algorithme de détection de contours, \textit{Canny edge detection}, présenté par l'australien J. Canny en 1986.\\
 
 \subsubsection{Fonction de mérite}
-Une fois la caractérisation choisie, il faut établir une méthode de comparaison débouchant sur un coefficient de qualité.
-Une fonction de mérite, \textit{figure-of-merit}, qui mesure la concordance entre les données et le \textit{modèle}, tout en considérant un choix particulier des paramètres.
+Une fois la caractérisation choisie, il faut établir une méthode de comparaison débouchant sur un coefficient de qualité sanctionnant l'estimation ou la prédiction de correspondance.\\
 
-En statistique fréquentielle, la fonction de mérite est généralement agencée de sorte que de petites valeurs obtenues représentent une concordance étroite. Tandis qu'une approche bayésienne choisirait une fonction de mérite de sorte à ce que des valeurs élevées représentent une meilleure concordance\cite{n}.
-La fonction de mérite devra être telle qu'elle offre la meilleur façon de trouver l'extremum désiré en fonction des caractéristiques prédéfinies de la cible.
+Une fonction de mérite, \textit{figure-of-merit}, est une fonction qui mesure la concordance entre les données et le \textit{modèle}, tout en considérant un choix particulier de paramètres.\\
+
+En statistique fréquentielle, la fonction de mérite est généralement agencée de sorte que de petites valeurs obtenues représentent une concordance étroite. Tandis qu'une approche bayésienne choisirait une fonction de mérite de sorte à ce que des valeurs élevées représentent une meilleure concordance \cite{n}.
+
+La fonction de mérite devra être telle qu'elle offre la meilleur façon de trouver l'extremum désiré en fonction des caractéristiques prédéfinies de la cible.\\
 
 Elle devra aussi considérer que les données récoltées sont généralement bruitées.
 Du fait que l'objet cible se modifie tout au long du flux d'images, la reconnaissance des critères comme correspondant comprend aussi leur différenciation du contexte/bruit. 
@@ -190,9 +230,9 @@ Il existe différentes méthodes de segmentation, certaines travaillent sur base
 \subsection{Image binaire}
 La méthode de segmentation la plus simple et la plus rapide est la création d'une image monochrome (aussi appelée \textit{binaire}) par seuillage: \`A partir de l'image originale convertie en niveaux de gris, on la transforme comparativement à une valeur seuil prédéterminée en une image binaire où chaque pixel prendra une des deux valeurs possibles.\\
 
-Le niveau de gris d'un pixels $p$ est obtenu en calculant sa coloration moyenne: \[p_{\{r,g,b\}} =\frac{p_r+p_g+p_b}{3}\]
+Le niveau de gris d'un pixels $p$ est obtenu en calculant sa coloration moyenne: \[p_{\{r,g,b\}} =\frac{p_r+p_g+p_b}{3}\]\\
 
-Cette transformation suivra la règle suivante:\\
+La transformation suivra la règle suivante:\\
 soit une image $I$ de taille $m*n$, un seuil $T$ \textit{global} et $g(x,y)$ le niveau de gris du point $(x,y)$,
 
 $$ \forall (x,y) \in I_{\{m,n\}}, (x,y) = \left\{ 
@@ -202,7 +242,8 @@ $$ \forall (x,y) \in I_{\{m,n\}}, (x,y) = \left\{
 \end{array} \right.
 $$ 
 Où les pixels appartenant à un objet de l'avant-plan sont étiquetés $1$ et ceux provenant du fond sont étiquetés $0$.\\ 
-Cette approche grossière de seuillage peut être affinée par l'usage d'un histogramme de niveau de gris, offrant notamment la possibilité de segmenter l'image selon de multiples seuils. 
+
+Cette approche grossière de seuillage peut être affinée par l'usage d'un histogramme de niveau de gris, offrant notamment la possibilité de segmenter l'image selon de multiples seuils.
 
 Ou encore, plutôt que d'utiliser un seuil \textit{global}, il est possible de faire dépendre $T$ de propriétés locales du point évalué, comme par exemple de la valeur moyenne du niveau de gris de l'entourage du point considéré. On parlera d'un seuillage \textit{adaptatif} ou \textit{dynamique}.\\
 
@@ -261,7 +302,8 @@ Des régions brutes délimitées par segmentation, il faut extraire les spécifi
 
 L'idée est de réduire les cibles à leurs caractéristiques internes (pixels compris dans la région) et/ou externes (contours, frontières, coins) ayant une forte signifiance, puis de rassembler ces caractéristiques en descripteurs propre à chaque région. On parlera de \textit{descripteur} pour désigner l'ensemble des traits intéressants (\textit{features}) décrivant l'objet cible. 
 
-Par exemple, une région pourrait être représentée par ses frontières et celles-ci serait décrites par des traits spécifiques (position relative des points du bord, périmètre, concavité, etc).\\
+Par exemple, une région pourrait être représentée par ses frontières et celles-ci serait décrites par des traits spécifiques (position relative des points du bord, périmètre, concavité, etc).
+\\
 
 Cette étape met en place un système de représentation des données en vue de les analyser. Autrement dit, on crée un système qui va compacter les données en des représentations utiles pour effectuer des calculs sur les descripteurs.\\
 
@@ -288,7 +330,25 @@ Hypothèses concernant les traits intéressant à suivre:
 \end{itemize}
 
 \subsection{Detecteur de coins}
-Harris corner detector
+Un coin est un point intersection d'au moins deux arêtes de sens opposé.\\
+
+Le \textit{Harris corner detector} est une méthode de détection de coins (traits d'intérêt) reconnu pour sa relative robustesse face aux bruits, aux variations de luminosité et aux variations géométriques. \\
+
+l'algorithme, décrit par Harris et Stephens, fonctionne sur l'évaluation d'une fonction d'\textit{auto-corrélation} appliquée localement. 
+En mathématique, l'auto-corrélation c'est corrélation croisée du signal par lui-même, cela permet de détecter des régularités, des motifs répétés au sein d'un signal.   
+
+La fonction d'auto-corrélation, décrite par \cite{q} comme l'erreur quadratique moyenne (\textit{sum of squared differences}), mesure les changements locaux dûs à l'application d'un léger décalage dans chaque direction.\\
+$$
+E(x,y) = \sum_{u,v} \texttt{w}(u,v) \, \left( I(x+u,y+v) - I(u,v)\right)^2
+$$
+où
+\begin{itemize}
+\item[]$I$ est une image en niveau de gris.
+\item[]$\texttt{w}(u,v)$ spécifie la taille de la fenêtre considérée, vaudra $1$ quand on se trouve dans la région d'intérêt, $0$ sinon.
+\item[]$x$,$y$ est la quantité de déplacement dans une direction.
+\item[]Une grande variation de $E$ dans la direction de $(x,y)$ dénote un trait d'intérêt.\\
+\end{itemize}
+
 \subsection{Flux Optique}
 
 \section{Analyses}
