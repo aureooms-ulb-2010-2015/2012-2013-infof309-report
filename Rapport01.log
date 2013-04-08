@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.1.26)  5 APR 2013 23:50
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.1.26)  8 APR 2013 10:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,13 +530,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 3.
- [1
-
-])
+)
 \tf@toc=\write3
 \openout3 = `Rapport01.toc'.
 
- [2]
+ [1
+
+]
 Chapitre 1.
 
 Overfull \hbox (12.51807pt too wide) in paragraph at lines 53--54
@@ -549,254 +549,257 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
-
- []
-
-[3
+[2
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+Chapitre 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
-<figureImageMatrice.png, id=25, 409.09982pt x 160.67169pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
+
+ []
+
+<figureImageMatrice.png, id=22, 409.09982pt x 160.67169pt>
 File: figureImageMatrice.png Graphic file (type png)
 
 <use figureImageMatrice.png>
-Package pdftex.def Info: figureImageMatrice.png used on input line 72.
+Package pdftex.def Info: figureImageMatrice.png used on input line 84.
 (pdftex.def)             Requested size: 409.09882pt x 160.6713pt.
+ [3
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--83
-
- []
-
-[4 <./figureImageMatrice.png>]
+]
 Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
  []
 
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 101.
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+[4 <./figureImageMatrice.png>]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 113.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 114--116
+Underfull \hbox (badness 10000) in paragraph at lines 126--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--125
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--151
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 137--139
-
- []
-
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 142.
+(Font)              <7> on input line 154.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 142.
+(Font)              <5> on input line 154.
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--145
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 178--179
+Underfull \hbox (badness 10000) in paragraph at lines 190--191
 
  []
 
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 File: uni-1.def 2012/04/20 UCS: Unicode data U+0100..U+01FF
-) [7]
-Chapitre 2.
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+)
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
 
  []
 
-[8
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 233--234
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 234--235
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 243--245
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
-
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
+Underfull \hbox (badness 10000) in paragraph at lines 246--248
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 268--269
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 264--265
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 278--279
+Underfull \hbox (badness 10000) in paragraph at lines 271--272
 
  []
 
-<figureDetectionDiscontinuities.png, id=60, 570.41678pt x 147.12108pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--282
+
+ []
+
+<figureDetectionDiscontinuities.png, id=57, 570.41678pt x 147.12108pt>
 File: figureDetectionDiscontinuities.png Graphic file (type png)
 
 <use figureDetectionDiscontinuities.png>
 Package pdftex.def Info: figureDetectionDiscontinuities.png used on input line 
-282.
+285.
 (pdftex.def)             Requested size: 342.2527pt x 88.27332pt.
- [10 <./figureDetectionDiscontinuities.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
-
- []
-
-
+ [9 <./figureDetectionDiscontinuities.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 297--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--302
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--307
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 308--309
+Underfull \hbox (badness 10000) in paragraph at lines 308--310
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 312--313
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 321--322
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--339
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 318--319
+Underfull \hbox (badness 10000) in paragraph at lines 354--355
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--325
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 335--336
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--338
+Underfull \hbox (badness 10000) in paragraph at lines 370--371
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 342--343
-
- []
-
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 351--352
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 358--359
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 362--363
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 367--368
-
- []
-
-<figureOpticalConstraint.png, id=72, 686.565pt x 304.56642pt>
+<figureOpticalConstraint.png, id=68, 686.565pt x 304.56642pt>
 File: figureOpticalConstraint.png Graphic file (type png)
 
 <use figureOpticalConstraint.png>
-Package pdftex.def Info: figureOpticalConstraint.png used on input line 373.
+Package pdftex.def Info: figureOpticalConstraint.png used on input line 376.
 (pdftex.def)             Requested size: 274.62112pt x 121.8244pt.
- [13] [14 <./figureOpticalConstraint.png>]
+ [12] [13 <./figureOpticalConstraint.png>]
 Chapitre 3.
-<figurePredictionObservationCycle.png, id=80, 367.15741pt x 145.83054pt>
+<figurePredictionObservationCycle.png, id=77, 367.15741pt x 145.83054pt>
 File: figurePredictionObservationCycle.png Graphic file (type png)
 
 <use figurePredictionObservationCycle.png>
 Package pdftex.def Info: figurePredictionObservationCycle.png used on input lin
-e 409.
+e 412.
 (pdftex.def)             Requested size: 183.57825pt x 72.91508pt.
- [15
+ [14
 
  <./figurePredictionObservationCycle.png>]
-Overfull \hbox (10.56595pt too wide) in paragraph at lines 435--439
+Overfull \hbox (10.56595pt too wide) in paragraph at lines 438--442
 \T1/cmr/m/n/12 La den-sité \T1/cmr/m/it/12 a pri-ori $\OML/cmm/m/it/12 P\OT1/cm
 r/m/n/12 (\OT1/cmr/bx/n/12 x[]\OMS/cmsy/m/n/12 jZ[]\OT1/cmr/m/n/12 )$ \T1/cmr/m
 /n/12 est une pré-dic-tion is-sue de la den-sité \T1/cmr/m/it/12 a pos-te-ri-or
@@ -804,17 +807,17 @@ i $\OML/cmm/m/it/12 P\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 x[]\OMS/cmsy/m/n/12 jZ[]
 \OT1/cmr/m/n/12 )$
  []
 
-[16] [17]
+[15] [16]
 Chapitre 4.
-[18
+[17
 
 ]
 Chapitre 5.
-[19
+[18
 
 ]
 Chapitre 6.
-(./Rapport01.bbl [20
+(./Rapport01.bbl [19
 
 ]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
@@ -842,9 +845,13 @@ Underfull \hbox (badness 1062) in paragraph at lines 68--73
 \T1/cmr/m/it/12 http ://www.cvl.iis.u-
  []
 
-[21
+[20
 
-]) [22] (./Rapport01.aux) ) 
+]) [21] (./Rapport01.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  5410 strings out of 495059
  69174 string characters out of 3182030
@@ -853,33 +860,32 @@ Here is how much of TeX's memory you used:
  19057 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,8n,35p,1152b,595s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen
-/ec/ectt1000.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt
-1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600
-pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1440.600pk> </ho
-me/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/ghost
-bot/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/ghostbot/.tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/ghostbot/.texmf-var/f
-onts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecrm1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecbx2488.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecbx1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1
-440.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600p
-k> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> </hom
-e/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/ghostb
-ot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecxc1200.600pk></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb>
-Output written on Rapport01.pdf (23 pages, 392866 bytes).
+ </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </hom
+e/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/ghostb
+ot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/ghostbot/.texm
+f-var/fonts/pk/ljfour/jknappen/ec/ecbi1440.600pk> </home/ghostbot/.texmf-var/fo
+nts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/ghostbot/.texmf-var/fonts/pk/l
+jfour/jknappen/ec/eccc1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jk
+nappen/ec/ecbx1728.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecti1200.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm12
+00.600pk> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk
+> </home/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home
+/ghostbot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/ghostbo
+t/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/ghostbot/.texmf
+-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> </home/ghostbot/.texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/ghostbot/.texmf-var/fonts/pk/lj
+four/jknappen/ec/ecxc1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on Rapport01.pdf (22 pages, 389222 bytes).
 PDF statistics:
- 707 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
+ 697 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

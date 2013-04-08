@@ -56,6 +56,18 @@ Par exemple, l'analyse des déplacements individuels au sein d'un banc de poisso
 
 Le but de ce projet est d'ébaucher une solution logicielle d'analyse vidéo permettant l'automatisation du travail de détection et de suivi de poissons dans un milieu donné. 
 
+\section{Approche et solution}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+
+\chapter{\'{E}tat de l'art}
+
+Il existe un grand nombre d'approche pour traiter la détection et le suivi d'objet au travers de flux d'images. 
+
+Il est nécessaire de prendre connaissance de ces différentes approches et leur évolution, ainsi que des bénéfices ou contraintes qu'elles induisent. D'autre part le sujet étant prolixe, nous limiterons ici l'exposé des méthodes de détection et de suivi à celles que nous avons utilisée ou celles qui nous sont, à un moment ou l'autre, apparues importantes pour traiter de la problématique qui nous occupe.
+
 \section{Contexte, matériaux et questions}
 Une vidéo est un flux, une succession d'images, dites  \textit{frames}. Le flux est dépendant de la fréquence de lecture/d'affichage, soit un taux en fps (\textit{frames per second}). 
 
@@ -203,15 +215,6 @@ De façon générale, pour outrepasser la pollution issue d'éléments parasites
 %\item La déformation due à la distance par rapport à l’objectif.
 %\end{itemize}
 
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
-
-\chapter{\'{E}tat de l'art}
-
-Il existe un grand nombre d'approche pour traiter la détection et le suivi d'objet au travers de flux d'images. 
-
-Il est nécessaire de prendre connaissance de ces différentes approches et leur évolution, ainsi que des bénéfices ou contraintes qu'elles induisent. D'autre part le sujet étant prolixe, nous limiterons ici l'exposé des méthodes de détection et de suivi à celles que nous avons utilisée ou celles qui nous sont, à un moment ou l'autre, apparues importantes pour traiter de la problématique qui nous occupe.
 
 \section{Caneva}
 Même s'il n'est pas de structure commune aux algorithmes existants pour la détection et le suivi de cible en mouvement, les étapes suivantes semble prévaloir pour beaucoup de ceux-ci.\\
@@ -221,13 +224,13 @@ Même s'il n'est pas de structure commune aux algorithmes existants pour la dét
 \end{tabular} 
 \end{center}
 
-\section{Segmentation}
+\subsection{Segmentation}
 A cette étape, il s'agit de dégrossir le matériau brut, de simplifier l'image en ne gardant que ce qui fait sens pour les opérations suivantes. L'objectif sous-tendant à toutes méthodes de traitement d'images étant de minimiser l'usage inutile de ressources computationnelles, la segmentation de l'image est une première approche pour ne plus focaliser que sur le signifiant. 
 
 La segmentation est une opération de partitionnement de l'image en un certain nombre de segments. Cette opération est utilisée pour dégager des zones d'intérêts de l'image. Elle assigne une étiquette à chaque pixel de sorte que tous pixels identiquement étiquetés partagent des caractéristiques visuelles données (couleur, intensité, texture). Aussi tous les segments adjacents sont sensiblement différents suivant ces caractéristiques \footnote{\url{http://en.wikipedia.org/wiki/Segmentation_(image_processing)}}.\\
 
 Il existe différentes méthodes de segmentation, certaines travaillent sur base de régions qu'elles accroissent, décomposent ou fusionnent, d'autres sur les contours, la classification ou le seuillage des pixels en fonction de leur intensité.\\
-\subsection{Image binaire}
+\subsubsection{Image binaire}
 La méthode de segmentation la plus simple et la plus rapide est la création d'une image monochrome (aussi appelée \textit{binaire}) par seuillage: \`A partir de l'image originale convertie en niveaux de gris, on la transforme comparativement à une valeur seuil prédéterminée en une image binaire où chaque pixel prendra une des deux valeurs possibles.\\
 
 Le niveau de gris d'un pixels $p$ est obtenu en calculant sa coloration moyenne: \[p_{\{r,g,b\}} =\frac{p_r+p_g+p_b}{3}\]\\
@@ -249,7 +252,7 @@ Ou encore, plutôt que d'utiliser un seuil \textit{global}, il est possible de f
 
 L'image binaire peut, ensuite, être utilisée comme un masque permettant d'isoler des régions potentiellement intéressantes.
 
-\subsection{Watershed}
+\subsubsection{Watershed}
 L'algorithme de segmentation \textit{Watershed}, traduit par "ligne de partage des eaux", se base sur une interprétation tridimensionnelle de l'image, où un point est caractérisé par ses deux composantes spatiales et son niveau de gris.
 
 De cette image, perçue comme un relief topographique, sera calculée la ligne de partage des eaux pour délimiter le bassin-versant, c'est-à-dire l'aire à l'intérieur de laquelle convergerait de l'eau hypothétiquement tombée. 
@@ -271,7 +274,7 @@ Il existe plusieurs d'implémenter cet algorithme, parmi les plus communes:
 La segmentation par ligne de partage des eaux donne de bons résultats dans l'extraction d'objet presque uniforme, mais conduit souvent à une sur-segmentation dû aux bruits et irrégularités locales. Une façon de pallier à ce désavantage est d'utiliser des marqueurs. Les marqueurs sont définis comme des composantes connexes appartenant soit à un objet d'avant-plan, soit au fond. La sélection des marqueurs à garder pourra être effectuée par simple estimation du niveau de gris et de la connectivité ou par une   
 
 
-\subsection{Détection de contours}
+\subsubsection{Détection de contours}
 Intuitivement, un contour est défini comme une suite de pixels contigus reflétant la frontière entre deux régions. 
 La détection des contours permet alors de découper ou fusionner l'image en sous-régions.
 
@@ -296,7 +299,7 @@ De même, en évaluant la dérivée seconde par application du Laplacien (\ref{f
 
 Le filtre Canny est un des algorithmes les plus utilisés pour la détection des contours, il se base sur l'intensité et la direction du gradient. \\
 
-\section{Extraction}
+\subsection{Extraction}
 
 Des régions brutes délimitées par segmentation, il faut extraire les spécificités en vue d'effectuer les calculs souhaités.\\
 
@@ -308,7 +311,7 @@ Par exemple, une région pourrait être représentée par ses frontières et cel
 Cette étape met en place un système de représentation des données en vue de les analyser. Autrement dit, on crée un système qui va compacter les données en des représentations utiles pour effectuer des calculs sur les descripteurs.\\
 
 Le choix de ces traits est laissé libre, ils seront choisis relativement à la façon dont sera entrevue l'analyse des données. Par contre il est impératif que les traits caractéristiques forment des descripteur insensibles aux variations géométriques (homothétie, translation, rotation) ou photométriques (intensité).   
-\subsection{Good feature to track}
+\subsubsection{Good feature to track}
 Les «bons» traits à suivre sont ceux dont le mouvement peut être estimé de manière fiable.\\
 
 J. Shi et C. Tomasi ont présenté\footnote{IEEE Conference on Computer Vision and Pattern Recognition (CVPR94) Seattle, June 1994} en 1994 leurs travaux sous l'intitulé \textit{Good Feature to Track}, l'article fait toujours autorité sur le sujet. 
@@ -331,7 +334,7 @@ Hypothèses concernant les traits intéressants à suivre:
 \item Cohérence spatiale: un point se déplace dans son voisinage.
 \end{itemize}
 
-\subsection{Detecteur de coins}
+\subsubsection{Detecteur de coins}
 Un coin est un point intersection d'au moins deux arêtes de sens opposé.\\
 
 Le \textit{Harris corner detector} est une méthode de détection de coins (traits d'intérêt) reconnu pour sa relative robustesse face aux bruits, aux variations de luminosité et aux variations géométriques. \\
@@ -351,7 +354,7 @@ où
 \item[]Une grande variation de $E$ dans la direction de $(x,y)$ dénote un trait d'intérêt.\\
 \end{itemize}
 
-\subsection{Flux Optique}
+\subsubsection{Flux Optique}
 
 Une caméra filme des objets en mouvement dans un espace à trois dimensions, leur mouvement relatif est un champ de vecteurs à trois composantes. 
 
@@ -374,12 +377,12 @@ $$\vec v \cdot \nabla I + \frac{\partial I}{\partial t} = 0 $$
 \caption{Contrainte du flux optique}
 \end{figure}
 
-\section{Analyses}
-\subsection{Matcher}
-\subsection{Distance euclidienne}
-\subsection{SURF}
+\subsection{Analyses}
+\subsubsection{Matcher}
+\subsubsection{Distance euclidienne}
+\subsubsection{SURF}
 
-\section{Suivi}
+\subsection{Suivi}
 
 
 \section{Exigences}
