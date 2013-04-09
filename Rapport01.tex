@@ -10,6 +10,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
+\usepackage{mathtools,amssymb,amsthm}%
 \usepackage[left=2.5cm,top=2cm,right=2.5cm,nohead,nofoot]{geometry}
 \linespread{1.1}
 
@@ -380,9 +381,137 @@ $$\vec v \cdot \nabla I + \frac{\partial I}{\partial t} = 0 $$
 \subsection{Analyses}
 \subsubsection{Matcher}
 \subsubsection{Distance euclidienne}
-\subsubsection{SURF}
-
 \subsection{Suivi}
+
+\section{SURF}
+
+%===================================================================================
+\subsection{Speeded Up Robust Features}
+%===================================================================================
+Le \textit{Speeded Up Robust Features} (SURF) est un algorithme de \textit{détection de caractéristique} présenté par des chercheurs de l'\textit{\'Ecole Polytechnique Fédérale} de Zurich et de l'\textit{Université Catholique de Louvain} pour la première fois en 2006\footnote{Herbert Bay, Tinne Tuytelaars et Luc Van Gool, "\textit{SURF: Speeded Up Robust Features}", dans 9th \textit{European Conference on Computer Vision}, Graz, Autriche, 7-13 mai 2006}, puis dans une version révisée en 2008\footnote{Herbert Bay, Andreas Ess, Tinne Tuytelaars et Luc Van Gool, "\textit{SURF: Speeded Up Robust Features}", \textit{Computer Vision and Image Understanding}, vol. 110, no 3, 2008, p. 346-359}.
+L'objectif de l'algorithme est de rechercher les correspondances entre objets ou scènes présentes dans deux ou plusieurs images distinctes mises en confrontation deux à deux. Il comporte 3 phases. 
+\\Dans un premier temps, l'algorithme recherche des points intéressants de l'image, comme par exemple les points de bords ou les jointures en «T». Ces points doivent être faciles à déterminer, c'est-à-dire, que leurs caractéristiques sont telles que leur détermination doit être toujours reproductible sans ambigüité. \\ 
+Ensuite, l'algorithme associe à chaque point d'intérêt un vecteur caractéristique qui représente un descripteur. Celui-ci, doit être distinct et surtout robuste par rapport au bruit, aux erreurs d'individuation et aux déformations géométriques et photométriques. \\
+Enfin,  l'algorithme compare les descripteurs des deux images. Cette comparaison se base généralement sur la distance entre les vecteurs, par exemple, la distance euclidienne.
+
+%===================================================================================
+\subsection{Recherche des points d'intérêt}
+%===================================================================================
+\subsubsection{Image Intégrale}
+L'efficacité de l'algorithme SURF est dû principalement à l'utilisation d'une représentation intermédiaire de l'image connue sous le nom d'\textit{image intégrale}.
+\\L'image intégrale est une image numérique qui est calculée rapidement à partir de l'image originale. On l'utilise pour accélérer le calcul de chaque zone rectangulaire dont le sommet supérieur gauche est à l'origine de l'image. 
+\\Proposée en 1984\footnote{Crow, Franklin (1984). "\textit{Summed-area tables for texture mapping}". SIGGRAPH '84: \textit{Proceedings of the 11th annual conference on Computer graphics and interactive techniques}: 207–212} comme méthode d'\textit{infographie}, c'est en 2001 qu'elle a été reformulée par la méthode de Viola et Jones\footnote{Paul Viola et Michael Jones, \textit{Robust Real-time Object Detection} IJCV 2001}, dans le cadre de la \textit{vision par ordinateur}.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure1.png}
+\caption{Calcul d'une aire en utilisant une image intégrale.}
+\label{fig1}
+\end{figure}
+\\Étant donné une image $I$ en \textit{input} et un point de coordonnées $(x,y)$, l'image intégrale $I(x,y)$ est calculée en prenant la somme des valeurs de l'intensité des pixels compris entre le point et l'origine. Formellement, la formule est :
+$$I_{\Sigma}(x,y)=\sum_{i=0}^{i\leq x} \sum_{j=0}^{j\leq y} I(x,y)$$
+En utilisant l'image intégrale, le calcul de la somme des intensités d'une région rectangulaire quelconque se réduit à quatre opérations. En effet, si l'on considère un rectangle définit par les sommets $A$, $B$, $C$, $D$ (figure~\ref{fig1}), la somme qui donne la valeur de l'image intégrale vaut :
+$$ \Sigma = A+D-(C+B)$$
+où $A$, $B$, $C$, $D$ sont les intégrales correspondantes aux coordonnées des sommets. Ce calcul est invariant par rapport aux dimensions de la zone considéré et SURF utilise cette propriété pour effectuer de façon efficace la \textit{convolution} lorsque les dimensions des filtres appliqués à l'image varient.
+\\La convolution est l'outil qui permet la construction de filtres linéaires ou de filtres de déplacements invariants. L'équation de convolution, notée $g(x)$, de la séquence $f(x)$ avec une fonction $h(x)$ est :
+$$g(x)=f(x)\ast h(x)=\sum_{\forall k}h(x-k)f(k)$$
+$f(x)$ est la fonction d'origine, $g(x)$ est la fonction qui résulte de la convolution et $h(x)$ est le noyau de convolution.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure2.png}
+\caption{Exemple de convolution 2D.}
+\label{fig2}
+\end{figure}
+%===================================================================================
+\subsubsection{Points d'intérêt basés sur la matrice Hessienne}
+Le \textit{détecteur} SURF se base sur le déterminant de la \textit{matrice hessienne}. Pour comprendre son fonctionnement, on considère une fonction continue $f$ de deux variables telle que :
+$$f:x,y\mapsto f(x,y)$$
+La matrice hessienne, $H$, est la matrice des dérivées partielles de la fonction $f$ :
+$$
+H(f(x,y))=
+\begin{bmatrix}
+\frac {\partial^2 f(x,y)}{\partial x^2} &\frac {\partial^2 f(x,y)}{\partial x \partial y} \\
+\frac {\partial^2 f(x,y)}{\partial x \partial y} &\frac {\partial^2 f(x,y)}{\partial y^2}
+\end{bmatrix}
+$$
+Le déterminant de cette matrice est calculé de la façon suivante :
+$$\left|H(f(x,y))\right|=\frac{\partial^2 f(x,y)}{\partial x^2} \frac{\partial^2 f(x,y)}{\partial y^2} - \left(\frac{\partial^2 f(x,y)}{\partial x \partial y}\right)^2 $$
+Ce déterminant est utilisé pour trouver le maximum et le minimum de la fonction à travers le test du hessien des dérivées secondes. En appliquent le test, il est alors possible de savoir si un point $(x,y)$ est un extremum locale pour la fonction $f$.\\
+Les dérivées partielles secondes sont calculées en utilisant un \textit{filtre gaussien normalisé du second ordre}, qui permet une analyse à plusieurs échelles et dans l'espace. Grâce à ce calcul, il est possible de déterminer les points du filtre en $x$, $y$ et $xy$ et de calculer les quatre termes de la matrice. L'utilisation de la gaussienne permet en outre, de faire varier l'effet de lissage durant la phase de convolution de façon à permettre le calcul du déterminant à différentes échelles.
+\\\'Etant donné que la gaussienne est une fonction \textit{isotrope} (c'est-à-dire à symétrie circulaire), la convolution avec le point est invariant à la rotation. Il est alors possible de calculer la matrice hessienne comme fonction du point $\mathsf{x}=(x,y)$ et de l'échelle $\sigma$.
+$$
+H(\mathsf{x},\sigma)=
+\begin{bmatrix}
+L_{xx}(\mathsf{x},\sigma) &L_{xy}(\mathsf{x},\sigma)\\
+L_{xy}(\mathsf{x},\sigma) &L_{yy}(\mathsf{x},\sigma)
+\end{bmatrix}
+$$
+Ici, $L_{xx}(\mathsf{x},\sigma)$ se réfère à la convolution de la dérivée gaussienne de second ordre $\frac{\partial^2 g(\sigma)}{\partial x^2}$ avec l'image $I$ au point $\mathsf{x}=(x,y)$ et de façon analogue on définit $L_{yy}(\mathsf{x},\sigma)$ et $L_{xy}(\mathsf{x},\sigma)$. Ces dérivées sont connues comme LoG (\textit{Laplacian of Gaussian}).
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure3.png}
+\caption{Approximation du laplacien de gaussienne.}
+\label{fig3}
+\end{figure}
+\\L'approximation des LoG se fait à travers les approximations des points respectifs. La figure~\ref{fig3} montre les similitudes entre les filtres originaux et ceux obtenus par approximation et discrétisation.
+\\Une amélioration des performances peut s'obtenir en utilisant conjointement les filtres avec les images intégrales. Et pour une approximation du determinant de la hessienne plus précise, on utilise une approximation de gaussienne.
+$$\det(H_{approx})=D_{xx}D_{yy}-(0.9D_{xy})^2$$
+La perte de precision est amplement compensée par une augmentation d'efficacité et de vitesse.
+\\La recherche des maximum locaux dans l'espace à travers les différentes échelles conduit à l'identification des points d'intérêt de l'image.
+%===================================================================================
+\subsubsection{Espace d'échelle}
+La théorie des \textit{espaces d'échelle} (\textit{Scale space theory}) est un model qui est apparu progressivement\footnote{Witkin, A. P. "\textit{Scale-space filtering}", Proc. 8th Int. Joint Conf. Art. Intell., Karlsruhe, Germany,1019–1022, 1983} \footnote{Koenderink, Jan "\textit{The structure of images}", Biological Cybernetics, 50:363–370, 1984} \footnote{Florack, Luc, "\textit{Image Structure}", Kluwer Academic Publishers, 1997} \footnote{Romeny, Bart ter Haar, "\textit{Front-End Vision and Multi-Scale Image Analysis}", Kluwer Academic Publishers, 2003} dans le domaine de la vision par ordinateur, pour prendre en compte la nature résolument multi-échelles des données images. L'espace d'échelle (\textit{scale-space}) est donc une fonction qui est utilisée pour trouver des points à travers toute les échelles possibles de l'image. Cette fonction est implémentée comme une pyramide dans laquelle l'image en \textit{input} est iterativement convolutée avec un point gaussien, et à maintes reprises redimensionnée. 
+\\\'Etant donné que les coûts de computation des points utilisés par SURF sont invariants par rapport à leurs dimensions, l'espace d'échelle est créé en appliquant des points toujours plus grand à l'image originale. Ceci permet aux différents niveaux de la pyramide de l'espace d'échelle d'être calculés simultanément dans une éventuelle implémentation \textit{multithread}.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure4.png}
+\caption{Pyramide du filtre.}
+\label{fig4}
+\end{figure}
+\\La figure~\ref{fig4} montre l'espace d'échelle utilisée par SURF. Seul le filtre varie, contrairement à l'image originale qui reste invariante.
+\\ Dans SURF, le niveau plus bas d'espace d'échelle est obtenu en appliquant des filtre $9\times9$ comme ceux de la figure~\ref{fig3}. Ces filtres correspondent à une gaussienne avec un écart type $\sigma$ qui vaut 1,2. Les niveaux successifs sont obtenus en incrémentant les filtres de bases et en conservant les proportions (figure~\ref{fig5}).
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure5.png}
+\caption{Structure du filtre.}
+\label{fig5}
+\end{figure}
+\\\'Etant donnée que les proportions sont conservées lorsque les dimensions des filtres et l'échelle augmentent, il est possible de  calculer la formule suivante :
+$$\sigma_{approx}=CurrentFilterSize.\frac{BaseFilterScale}{BaseFilterSize}=CurrentFilterSize.\frac{1,2}{9}$$
+%===================================================================================
+\subsubsection{Localisation des points d'intérêts}
+Le processus de détermination de l'échelle qui permet de trouver les points d'intérêt d'une image se divise en 3 partie. Dans un premier temps, on applique un filtre avec un seuil pour faire en sorte d'éliminer les valeurs trop petites (en augmentant ce seuil le nombre de points diminue).
+\\Successivement, on applique une \textit{suppression non-maximale} pour pouvoir trouver un ensemble de points candidats. Chaque pixel de l'espace d'échelle est confronté avec ses 26 points voisins, y compris les 8 points de l'échelle native et les 9 de chaque échelle supérieur et inférieur (figure~\ref{fig6}). Le pixel est un maximum s'il a une valeur supérieur à celle des pixels qui l'entourent à son échelle, à l'échelle supérieur et à celle inférieur. Si cette valeur est inférieur, il s'agit d'un minimum. \`A cette étape on dispose donc d'un ensemble de points d'intérêt filtrés qui sont soit un minimum, soit un maximum dans l'espace d'échelle.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure6.png}
+\caption{Suppression non maximale.}
+\label{fig6}
+\end{figure}
+\\L'étape finale consiste à interpoler les données dans le but de localiser de façon précise les points d'intérêt (les maximums).
+%===================================================================================
+\subsection{Descripteur des points d'intérêt}
+%===================================================================================
+Les \textit{descripteurs} SURF décrivent la distribution des intensités des pixels autours des points d'intérêt sélectionnés. Ce résultat est possible grâce à l'utilisation des \textit{filtres Haar}, qui servent à déterminer les gradients dans les directions $x$ et $y$.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure7.png}
+\caption{\textit{Haar Wavelets}.}
+\label{fig7}
+\end{figure}
+\\Le filtre à gauche de la figure~\ref{fig7} calcule la réponse dans la direction $x$, tandis que celui à droite effectue le calcul par rapport à $y$. Les poids valent 1 pour les régions noires et -1 pour les régions blanches. Quand ces filtres sont utilisés avec les images intégrales, seules 6 opérations sont nécessaires pour obtenir un résultat. 
+\\L'extraction des  descripteurs se divise en 2 phases. Tout d'abord pour chaque point d'intérêt on détermine une orientation, ensuite on construit une fenêtre centrée sur le point, dont la dimension dépend de l'échelle à laquelle le point d'intérêt a été trouvé. \`A partir de cette zone, et avec l'utilisation conjointe des filtres Haar et de l'image intégrale, on extrait un vecteur de 64 composantes.
+%===================================================================================
+\subsubsection{Composantes du descripteur}
+Le premier pas dans l'extraction des descripteurs SURF consiste à construire une fenêtre carrée centrée au point d'intérêt. Cette fenêtre contient les pixels qui produiront le descripteur. Sa dimension est de $20\sigma$, avec $\sigma$ l'échelle à laquelle le point d'intérêt a été trouvé. La fenêtre est orientée de façon concorde à l'orientation du point.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.3]{figure8.png}
+\caption{Composants du descripteur.}
+\label{fig8}
+\end{figure}
+\\La fenêtre du descripteur est divisée en sous-régions  $4\times4$. \`A l'intérieur de chaque sous-région les filtres de Haar, de dimension $2\sigma$, sont appliqués sur 25 points uniformément distribués. Pour chaque région (pour les 25 points) on a : 
+$$v_{sous-region}= \left[ \sum dx,\sum dy,\sum |dx|,\sum |dy|\right]$$
+\`A la figure~\ref{fig8}, le carré à la bordure épaisse est une des 16 sous-régions et les points internes représentent les échantillons sur lesquelles est calculé le résultat donné par les \textit{Haar Wavelets}.
 
 
 \section{Exigences}
@@ -481,5 +610,5 @@ sensible au transformations géométriques (changement d'échelle, rotation, dis
 \nocite{*}
 
 \addcontentsline{toc}{chapter}{Bibliographie}
-
+\listoffigures
 \end{document}
