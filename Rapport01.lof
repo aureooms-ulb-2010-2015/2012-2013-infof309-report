@@ -1,0 +1,19 @@
+\select@language {french}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Matrice de pixels}}{4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces D\IeC {\'e}tection de contours}}{9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Contrainte du flux optique}}{13}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Calcul d'une aire en utilisant une image int\IeC {\'e}grale.}}{14}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Exemple de convolution 2D.}}{15}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Approximation du laplacien de gaussienne.}}{16}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Pyramide du filtre.}}{17}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Structure du filtre.}}{17}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Suppression non maximale.}}{18}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces \textit {Haar Wavelets}.}}{18}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Composants du descripteur.}}{19}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Cycle de pr\IeC {\'e}diction - observation}}{20}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
