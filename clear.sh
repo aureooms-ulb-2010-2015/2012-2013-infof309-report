@@ -1,0 +1,1 @@
+rm *.aux *.lof *.log *.bbl *.blg *.toc
