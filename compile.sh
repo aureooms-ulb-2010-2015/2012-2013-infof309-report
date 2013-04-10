@@ -1,1 +1,1 @@
-pdflatex Rapport01.tex && bibtex biblio && pdflatex Rapport01.tex && pdflatex Rapport01.tex
+pdflatex Rapport01.tex && bibtex Rapport01 && pdflatex Rapport01.tex && pdflatex Rapport01.tex
