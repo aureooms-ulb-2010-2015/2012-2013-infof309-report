@@ -215,8 +215,75 @@ De façon générale, pour outrepasser la pollution issue d'éléments parasites
 %\item la cible peut apparaître de différentes manières devant l’objectif.\\ Pour résoudre ce problème, on utilise un algorithme de transposition au sein duquel on essaiera de faire correspondre la forme du poisson à , en tenant compte des différentes déformations.
 %\item La déformation due à la distance par rapport à l’objectif.
 %\end{itemize}
+\subsection{Luma, luminance et niveau de gris}
+La plus part des algorithmes de traitement d'images fonctionnent à partir d'images couleurs transformées en niveau de gris, c'est-à-dire ne considérant que l'intensité lumineuse de l'image.\\
+ 
+La lumière dénuée de couleurs est dite monochromatique ou achromatique. L'unique attribut d'une telle lumière est son intensité. L'image en \textit{niveau de gris} représente alors l'intensité achromatique de l'image.\\ 
+
+D'une image en niveau de gris, on peut d'une part travailler sur l'intensité des objets décrits dans l'image, et d'autre part réduire le coût computationnel du traitement en ne considérant qu'une valeur par pixels.\\
+
+La luminance est définie de différentes façons, ce qui peut porter à confusion. Globalement, la luminance, définie en \textit{lumens}, mesure la quantité d'énergie qu'un observateur perçoit d'une source de lumière donnée.  
+\subsubsection{Luma ou luminance}
+On parlera de luma pour décrire la luminance calculée d'un appareil visuel et de luminance lorsqu'il s'agit de la grandeur physique ou de la luminance relative.
+Les deux termes désignent un même phénomène physique, leur distinction provient de l'usage qui en est fait.
+ 
+\begin{enumerate}
+\item Luma est utilisé dans le domaine vidéo. C'est la brillance de l'image, soit la partie du signal vidéo correspondant à l'intensité lumineuse.  
+
+Elle représente donc la part achromatique de la vidéo, mais précisément la "quantité de lumière" présente dans l'image résultante de l'application de la loi de puissance \textit{gamma}.\\
+
+\item La luminance relative, est l'intensité de l'image calculée selon un espace colorimétrique précis, cette appellation est couramment utilisée en imagerie numérique.\\
+\end{enumerate}
+
+Dans le domaine vidéo, gamma est le facteur qui caractérise le contraste d'un signal visuel. C'est une relation qui approche une loi de puissance liant amplitude de la luminance du signal et luminance réelle de l'image à l'écran. 
+
+Ce facteur était initialement dû au fait que les tubes cathodiques avaient une courbe de réponses qui ne réagissait peu ou pas pour des amplitudes de signal trop faible. Le facteur gamma était alors calculé tel qu'il corrigeait le problème. 
+
+Le facteur gamma est utilisé pour la calibration du support d'affichage des images afin que celle-ci apparaissent normale à l'œil humain.\\
+
+La luminance relative et la valeur luma sont calculées identiquement comme une somme pondérée des composantes RGB et suivant le cas après \textit{correction gamma} des images vidéos ou pas:
+$$ Y' = 0.299*R' + 0.587*G' + 0.114*B' $$
+où
+\begin{description}
+\item[$Y'$] est la valeur de luma.
+\item[$R'$,$G'$,$B'$] sont les composantes RGB après correction gamma.\\
+\end{description}
+
+Somme pondérée des composantes RGB de l'image sans correction gamma, selon la Rec. 709:
+$$Y = 0.2126*R + 0.7152*G + 0.0722*B$$ 
+où $Y$ est la valeur de luma.\\
+
+Les coefficients permettent de se rapprocher au mieux de la perception humaine des couleurs. On voit en particulier que, dans la perception humaine de l'intensité lumineuse, le vert intervient sensiblement plus contrairement au bleu.
 
 
+Ces coefficients sont déterminés relativement au support d'affichage et sont précisés dans des recommandations. 
+
+Les plus courantes sont:
+\begin{enumerate}
+\item la recommandation Rec. 709 pour les HDTV donne pour luma: 
+$$Y =  0.2126*R+0.7152*G+0.0722*B $$ 
+\item la recommandation CCIR 601 donne pour luma: 
+$$Y =  0.299*R+0.587*G+0.114*B $$
+\end{enumerate}
+Ces recommandations sont faites de telle façons que les couleurs fondamentales et le blanc soient correctes et donc que la représentation de la luminance soit maintenue.\\
+
+
+\subsubsection*{Niveau de gris}
+
+L'image en niveau de gris est obtenue en attribuant aux composantes de chaque pixel la valeur en luma ou luminance de ce point.
+$$
+	\forall p \in I_{m*n}, \left\{
+	\begin{array}{l l}
+	Y'_p = 0.299*R'_p + 0.587*G_p' + 0.114*B'_p \\ 
+	p_{[r,g,b]} = [Y'_p,Y'_p,Y'_p] 
+	\end{array} \right.
+$$
+
+
+Une autre approche plus simpliste est de calculer le niveau de gris d'un pixels $p$ à partir de sa coloration moyenne: \[p_{\{r,g,b\}} =\frac{p_r+p_g+p_b}{3}\]
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Caneva}
 Même s'il n'est pas de structure commune aux algorithmes existants pour la détection et le suivi de cible en mouvement, les étapes suivantes semble prévaloir pour beaucoup de ceux-ci.\\
 \begin{center}
@@ -231,10 +298,9 @@ A cette étape, il s'agit de dégrossir le matériau brut, de simplifier l'image
 La segmentation est une opération de partitionnement de l'image en un certain nombre de segments. Cette opération est utilisée pour dégager des zones d'intérêts de l'image. Elle assigne une étiquette à chaque pixel de sorte que tous pixels identiquement étiquetés partagent des caractéristiques visuelles données (couleur, intensité, texture). Aussi tous les segments adjacents sont sensiblement différents suivant ces caractéristiques \footnote{\url{http://en.wikipedia.org/wiki/Segmentation_(image_processing)}}.\\
 
 Il existe différentes méthodes de segmentation, certaines travaillent sur base de régions qu'elles accroissent, décomposent ou fusionnent, d'autres sur les contours, la classification ou le seuillage des pixels en fonction de leur intensité.\\
+
 \subsubsection{Image binaire}
 La méthode de segmentation la plus simple et la plus rapide est la création d'une image monochrome (aussi appelée \textit{binaire}) par seuillage: \`A partir de l'image originale convertie en niveaux de gris, on la transforme comparativement à une valeur seuil prédéterminée en une image binaire où chaque pixel prendra une des deux valeurs possibles.\\
-
-Le niveau de gris d'un pixels $p$ est obtenu en calculant sa coloration moyenne: \[p_{\{r,g,b\}} =\frac{p_r+p_g+p_b}{3}\]\\
 
 La transformation suivra la règle suivante:\\
 soit une image $I$ de taille $m*n$, un seuil $T$ \textit{global} et $g(x,y)$ le niveau de gris du point $(x,y)$,
@@ -378,11 +444,38 @@ $$\vec v \cdot \nabla I + \frac{\partial I}{\partial t} = 0 $$
 \caption{Contrainte du flux optique}
 \end{figure}
 
-\subsection{Analyses}
-\subsubsection{Matcher}
-\subsubsection{Distance euclidienne}
-\subsection{Suivi}
+\subsection{Analyses et suivi}
+Cette étape a pour objectif la comparaison des zones d'intérêts et la reconnaissance de celles-ci comme consistantes.
 
+Le suivi de cibles s'apparente à l'étiquetage d'objet comme unique, au travers du flux vidéo, c'est la reconnaissance des cibles dans la séquence d'image. \\
+
+Pour en arriver au suivi d'objets, on aura effectué deux étapes, la localisation de cibles par segmentation et leur représentation par extraction de traits d'intérêt.
+
+Le procédé de suivi sera caractérisé par les opérations de filtrage et d'association de données.  \\
+
+Les images ont été réduites aux traits essentiels permettant une caractérisation relativement robuste des cibles. 
+
+Le processus de reconnaissance est opéré à partir des descripteurs précédemment extraits dont on aura estimé l'évolution suivant notamment sa dynamique. Il y a donc la création d'une prédiction à partir de laquelle sera évalué la correspondance avec l'observation de l'image au moment présent. 
+
+\paragraph{Méthodes d'évaluation des associations de descripteurs et de filtrage}
+Parmi les filtres les plus courant, il y a le filtre de Kalman et les filtres à particule.
+Le filtre condensation sera décrit plus en détails dans le chapitre "Méthode implémentées". \\  
+
+Il existe de nombreuses façon d'évaluer la correspondance de données. 
+
+Parmi les méthodes, pouvant faire office de fonctions de mérite, les plus connue: 
+La distance de Mahalanobis et la distance euclidienne. Nous avons utilisé la distance euclidienne.
+
+\subsubsection{Distance euclidienne}
+Correspondance par calcul de la distance euclidienne entre 2 pixels :
+
+Ce n'est rien d'autre que la racine carrée de la somme du carré des différences en niveau de gris dans une zone $n*n$ autour des 2 pixels.
+
+$$ \sqrt{\sum_{i=0}^{n}\sum_{j=0}^{n}(a_{i,j} - b_{i,j})^2} $$
+
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{SURF}
 
 %===================================================================================
@@ -513,7 +606,7 @@ Le premier pas dans l'extraction des descripteurs SURF consiste à construire un
 $$v_{sous-region}= \left[ \sum dx,\sum dy,\sum |dx|,\sum |dy|\right]$$
 \`A la figure~\ref{fig8}, le carré à la bordure épaisse est une des 16 sous-régions et les points internes représentent les échantillons sur lesquelles est calculé le résultat donné par les \textit{Haar Wavelets}.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exigences}
 Suite à ce qui a été énoncé, il est intéressant de dégager quelques exigences auxquels se devrait de répondre un système de tracking robuste. 
 \begin{itemize}
@@ -523,7 +616,8 @@ Suite à ce qui a été énoncé, il est intéressant de dégager quelques exige
 \item \textit{Stabilité}, malgré tout, le suivi de la cible doit perdurer.
 \end{itemize}
 
-
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Méthodes implémentées}
 
 %----------------------------------------------------------------------------------------
