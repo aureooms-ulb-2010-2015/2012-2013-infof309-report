@@ -49,15 +49,29 @@
 
 \section{Motivation}
 
-L'analyse logicielle vient de plus en plus appuyer le travail de tous ceux pour qui la récolte d'informations provient de processus d'acquisition numérique, i.e des vidéos enregistrées d'observations menées par des biologistes ou statisticiens.
+L'analyse logicielle vient de plus en plus appuyer le travail de ceux pour qui la récolte d'informations provient essentiellement d'une source numérique, i.e des vidéos enregistrées lors d'observations menées par des biologistes ou statisticiens, etc.
  
-L'usage de procédés automatisés permet le filtrage et l'analyse massive de données jusqu'alors fastidieuse à traiter. Données desquelles il est possible d'inférer ou d'appuyer des thèses selon les besoins.
+L'usage de procédés automatisés permet le filtrage et l'analyse massive de données qui était jusqu'alors une tâche fastidieuse à traiter. Données qui une fois traitées permettent d'inférer ou d'appuyer des thèses selon les besoins.
 
-Par exemple, l'analyse des déplacements individuels au sein d'un banc de poissons filmé pendant un longue période est une tache pour laquelle le passage par traitement informatisé apparaît comme nécessaire.\\
+Par exemple, l'analyse des déplacements individuels au sein d'un banc de poissons filmé pendant un longue période est une tache pour laquelle le passage par un traitement informatisé apparaît comme nécessaire.\\
 
 Le but de ce projet est d'ébaucher une solution logicielle d'analyse vidéo permettant l'automatisation du travail de détection et de suivi de poissons dans un milieu donné. 
 
 \section{Approche et solution}
+Dans le cadre de ce projet, l'algorithme \textit{condensation} a été implémenté comme solution pour le suivi de cibles.
+
+La réalisation de l'application comprenait plusieurs étapes:
+\begin{enumerate}
+\item Segmentation
+\item Détection de traits d'intérêts 
+\item Observations
+\item Prédictions
+\item Évaluation et Mise en correspondance
+\end{enumerate}
+Chacune de ces étapes a nécessité la compréhension de ses enjeux et des différentes réponses qui y ont été apportés. Suite à quoi, une implémentation a été choisie pour chacune d'elles.
+La concaténation de ces étapes a abouti en une implémentation de l'algorithme \textit{condensation}.\\
+
+Dans la recherche de solutions, d'autres approches ont été explorées, particulièrement l'algorithme SURF. Ce dernier sera exposé dans la section éponyme.  
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -624,27 +638,78 @@ Suite à ce qui a été énoncé, il est intéressant de dégager quelques exige
 %	Méthodes implémentées : Condensation
 %----------------------------------------------------------------------------------------
 \section{Conditionnal Density Propagation}
+\paragraph{Introduction}
 Afin de suivre un objet en mouvement au travers d'un flux vidéo, on doit être en mesure de déterminer à chaque \textit{frame} la position de la cible. 
 Cette détermination est rarement exacte car elle s'appuie sur de nombreuses mesures, pour la plus part instables. 
-La déformation de la cible, son occlusion, des changements de luminosité, etc, sont autant de mesures dont la propension à varier aléatoirement contribue à la génération de bruit dans la détermination de la cible.
-On souhaiterait approcher l'hypothétique détermination réelle qui aurait été obtenue aux moyens de mesures idéales. Tout au plus, l'approche attendue devrait être en mesure de mettre en exergue le tout ou une partie de la cible comme n'appartenant pas au bruit.\\
-Le processus de détermination se base sur un mouvement cyclique, partant d'un modèle donné dont la paramétrisation est issue d'observations antérieurs, on consolide ce modèle en évaluant sa pertinence à l'état présent, ce qui conduit à une prédiction sur l'état probable à l'étape suivant. 
-On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation}. La \textit{prédiction} est basée sur modèle affiné par les informations passées. L'\textit{observation}, ou phase de mesure, est la récolte d'informations sur l'état courant du système en vue de corriger la prédiction basée sur les mesures précédentes.\\
+La déformation de la cible, son occlusion, des changements de luminosité, etc, sont autant de mesures dont la propension à varier aléatoirement contribue à la génération de bruit dans la détermination de la cible.\\
+
+Un des objectifs de la méthode est d'approcher l'hypothétique détermination réelle qui aurait été obtenue aux moyens de mesures idéales. 
+
+C'est-à-dire, défini négativement, la méthode devrait être en mesure de mettre en exergue le tout ou une partie de la cible comme n'appartenant pas au bruit.\\
+
+Le processus de détermination se base sur un mouvement cyclique. Partant d'un modèle donné dont la paramétrisation est issue d'observations antérieurs, on consolide ce modèle en évaluant sa pertinence à l'état présent. Ce mouvement conduit à une prédiction sur l'état probable à l'étape suivant.\\ 
+On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation}. 
+\begin{description}
+\item [La prédiction] est basée sur un modèle affiné par les informations passées.
+\item [L'observation] ou phase de mesure, est la récolte d'informations sur l'état courant du système en vue de corriger la prédiction basée sur les mesures précédentes.\\
+\end{description}
+ 
 \begin{figure}[hbtp]
-\centering
+
 \includegraphics[scale=0.5]{figurePredictionObservationCycle.png}
+\centering
 \caption{Cycle de prédiction - observation}
 \end{figure}
 
+\paragraph{Filtre à particules}
+L'algorithme \textit{condensation} appartient à la classe des filtres particulaires/filtres à particules. Les filtres à particules sont à rapprocher des méthodes de Monte-Carlo séquentielles du fait notamment qu'ils utilisent des techniques probabilistes afin d'atteindre leur but.
+\textit{Condensation} contient en plus une approche bayésienne dans son processus de calcul.\\
+
+L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessite une discrétisation de l'espace du problème, augmentant alors la complexité de recherche de la solution.
+
+Les méthodes Monte-carlo séquentielles sont des méthodes fondées sur des simulations numériques permettant le calcul de distribution a posteriori. La discrétisation de l'espace des possibles est alors adapté à la forme de la densité.
+
+Les composantes du filtre particulaire apposé au suivi d'objets sont:
+\begin{enumerate}
+\item La séquence d'image $I_0,\cdots,I_n$ à des instants $t_0<\cdots<t_n$ est une suite d'observations $\mathbf{z}_t$ appartenant à $ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$.
+\item[] L'image entière est définie comme un système complexe dont l'évolution se manifeste de façon discrète au travers de la séquence vidéo.
+\item La cible que l'on souhaite suivre est un état caché $\mathbf{x}_k$ duquel on peut postuler l'existence:
+	\begin{itemize}
+	\item d'une suite d'état $\mathbf{x}_1,\cdots,\mathbf{x}_n$
+	\item d'un état initial $\mathbf{x}_0$ muni d'une loi initiale
+	\item d'une \textit{loi de transition} $P(\mathbf{x}_t|\mathbf{x}_{t-1})$
+\end{itemize}
+\item \textit{Loi de proposition} caractérisant la relation entre l'état de l'objet et l'observation $\pi(\mathbf{x}_k|\mathcal{Z}_{1:k})$\\
+\end{enumerate}
+
+L'algorithme \textit{condensation} propose donc d'approcher l'état du système a posteriori en utilisant une connaissance a priori de celui-ci.
+ 
+À partir d'une connaissance a priori du système et d'observations desquelles peut être caractérisée la variabilité statistique des données $z$ d'une image relativement à l'état de l'objet $x$, la distribution a posteriori peut être estimée pour $x_t$ étant donné $z_t$ au temps $t$.\\
+
+\paragraph{Chaîne Markov}
+L'hypothèse est faite que la dynamique des objets forme une chaîne de Markov telle que $$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$$
+Le processus stochastique vérifie la propriété de Markov si et seulement si la distribution conditionnelle de probabilité des états futurs, étant donné les états passés et l'état présent, ne dépend en fait que de l'état présent et non pas des états passés. On parle d'absence de mémoire au sein du processus.
+
+
+\paragraph{Approche bayésienne}
+L'approche bayésienne part de la densité a posteriori (formule), mais elle n'est pas toujours connue a priori
+
+Soit une fonction de vraisemblance $f(x_1, \ldots , x_n | \theta) = \prod_{i=1}^{n} f(x_i ; \theta)  $
+En un sens la fonction de vraisemblance est donc le contraire d'une fonction de densité de probabilité a posteriori en ce qu'elle donne, en fonction des observations xj connues, une information sur les valeurs susceptibles d'être prises par les paramètres $\theta_i$
+La prédiction doit prendre en compte toutes les alternatives possibles simultanément.
+L'algorithme Condensation s'attache à approcher l'état observé à partir de la probabilité d'avoir telle dynamique de l'objet (prédiction) sachant l'ensemble des mesures passées. L'ensemble des mesures passées peut être ramené à l'observation précédente, en effet elle représente tout l'historique de l'état du système 
+
+  
 reconstruire la trajectoire d'attributs dans une séquence d'images \\
-En probabilité, un processus stochastique vérifie la propriété de Markov si et seulement si la distribution conditionnelle de probabilité des états futurs, étant donné les états passés et l'état présent, ne dépend en fait que de l'état présent et non pas des états passés (absence de « mémoire »).
-$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$
 \subsection{Notation}
-L'\textit{état} de l'objet $\mathbf{x}$ au temps $t$ est noté $\mathbf{x}_t$ et son historique est l'ensemble $\mathcal{X}_{0:t} = \{\mathbf{x}_0,...,\mathbf{x}_t\}$\\ 
-De m\^eme, l'ensemble des \textit{features} (traits \textit{invariants}, aussi dit "les observations") est $\mathbf{z}_t$ et son historique $ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$\\
-La dynamique stochastique du système (équation de transition) est entièrement donnée par $P(\mathbf{x}_t|\mathbf{x}_{t-1})$ (processus Markovien)
-\paragraph{invariants}
-caractéristiques locales de luminance, (photométrique) ou géométrique
+\begin{description}
+\item[L'image] globale au moment $k$ est notée $I_k$, son historique est l'ensemble $$I_{0:n}=\{I_k, k=0,\cdots,n\}$$
+\item[L'objet] est la zone d'intérêt dans l'image dont on souhaite faire le suivi.
+\item[l'état de l'objet] $\mathbf{x}$ au temps $t$ est noté $\mathbf{x}_t$ et son historique est l'ensemble $$\mathcal{X}_{0:t} = \{\mathbf{x}_0,...,\mathbf{x}_t\}$$
+\item[Les observations] est l'ensemble des \textit{features} (traits \textit{invariants}, aussi dit "les observations") est $\mathbf{z}_t$ et son historique $$ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$$
+\item[La dynamique] stochastique du système (équation de transition) est entièrement donnée par $$P(\mathbf{x}_t|\mathbf{x}_{t-1})$$ (processus Markovien)
+\item[Les invariants] sont les caractéristiques locales de luminance ou géométrique.
+\end{description}
 \subsection{Dynamique du système}
 \paragraph{Dynamique Stochastique}
 L'état $\mathbf{x}$ est multidimensionnel et sa densité est plutot complexe.
