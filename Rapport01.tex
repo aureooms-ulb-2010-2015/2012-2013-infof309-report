@@ -106,7 +106,7 @@ Deux problématiques fortement liées peuvent être dégagées\footnote{Video Tr
 
 \subsection{La question du \textit{mouvement}}
 
-	La question du mouvement comporte deux aspects: la détermination d'une cible comme mouvante et la caractérisation de ce mouvement.\\	
+	La question du mouvement comporte deux aspects: la détermination d'une cible comme mouvante et la caractérisation de ce mouvement.
 	
 \subsubsection{Une cible mouvante}	
 	L'approche qui semble la plus évidente pour cerner une cible en mouvement est sa différenciation avec ce qui apparait comme statique. 
@@ -133,9 +133,7 @@ où,
 	\item[] $\texttt{dst}(x,y)$ est le pixels de destination et $\texttt{src}(x,y)$ celui de l'image source.
 	\item[] $\texttt{mask} (x,y)$ est une image binaire générée à partir de l'avant-plan extrait en $t-1$.
 	\end{itemize}
-	
-	
-	
+
 
 \subsubsection{Un mouvement déterminé}		
 	Le mouvement est caractérisé par une position d'origine (vecteur position), une direction (orientation vers un point de destination relativement a un référentiel) et une vitesse (obtenu en dérivant les coordonnées par rapport au temps).	
@@ -179,7 +177,7 @@ où,
 
 \subsection{La question de la \textit{correspondance}}
 
-L'objectif est de reconnaître et identifier une cible d'une frame à l'autre. \\
+L'objectif est de reconnaître et identifier une cible d'une frame à l'autre. 
 
 \subsubsection{Critères d'intérêt}
 Pour suivre une cible, on la compare au travers du flux d'images selon certaines \textit{unités de mesure}.
@@ -193,7 +191,7 @@ D'une image à l'autre, on doit pouvoir s'appuyer sur des critères robustes à 
 
 Il faut trouver des caractéristiques présentant des propriétés locales remarquables, c'est-à-dire des traits d'intérêts, stables ou \textit{invariants}, on parlera de \textit{features} de la cible.
 
-Il existe diverses méthodes de détection de zones d'intérêts, chacune relative aux types de zones d'intérêts sur lesquels on souhaite baser l'analyse de la cible. Citons parmi les plus connu, l'algorithme de détection de coins de C. Harris et M. Stephens ou encore celui de J. Shi et C. Tomasi sur l'estimation qualitative des traits d'intérêts, mais aussi l'algorithme de détection de contours, \textit{Canny edge detection}, présenté par l'australien J. Canny en 1986.\\
+Il existe diverses méthodes de détection de zones d'intérêts, chacune relative aux types de zones d'intérêts sur lesquels on souhaite baser l'analyse de la cible. Citons parmi les plus connu, l'algorithme de détection de coins de C. Harris et M. Stephens ou encore celui de J. Shi et C. Tomasi sur l'estimation qualitative des traits d'intérêts, mais aussi l'algorithme de détection de contours, \textit{Canny edge detection}, présenté par l'australien J. Canny en 1986.
 
 \subsubsection{Fonction de mérite}
 Une fois la caractérisation choisie, il faut établir une méthode de comparaison débouchant sur un coefficient de qualité sanctionnant l'estimation ou la prédiction de correspondance.\\
@@ -263,12 +261,7 @@ où
 \item[$R'$,$G'$,$B'$] sont les composantes RGB après correction gamma.\\
 \end{description}
 
-Somme pondérée des composantes RGB de l'image sans correction gamma, selon la Rec. 709:
-$$Y = 0.2126*R + 0.7152*G + 0.0722*B$$ 
-où $Y$ est la valeur de luma.\\
-
 Les coefficients permettent de se rapprocher au mieux de la perception humaine des couleurs. On voit en particulier que, dans la perception humaine de l'intensité lumineuse, le vert intervient sensiblement plus contrairement au bleu.
-
 
 Ces coefficients sont déterminés relativement au support d'affichage et sont précisés dans des recommandations. 
 
@@ -311,7 +304,7 @@ A cette étape, il s'agit de dégrossir le matériau brut, de simplifier l'image
 
 La segmentation est une opération de partitionnement de l'image en un certain nombre de segments. Cette opération est utilisée pour dégager des zones d'intérêts de l'image. Elle assigne une étiquette à chaque pixel de sorte que tous pixels identiquement étiquetés partagent des caractéristiques visuelles données (couleur, intensité, texture). Aussi tous les segments adjacents sont sensiblement différents suivant ces caractéristiques \footnote{\url{http://en.wikipedia.org/wiki/Segmentation_(image_processing)}}.\\
 
-Il existe différentes méthodes de segmentation, certaines travaillent sur base de régions qu'elles accroissent, décomposent ou fusionnent, d'autres sur les contours, la classification ou le seuillage des pixels en fonction de leur intensité.\\
+Il existe différentes méthodes de segmentation, certaines travaillent sur base de régions qu'elles accroissent, décomposent ou fusionnent, d'autres sur les contours, la classification ou le seuillage des pixels en fonction de leur intensité.
 
 \subsubsection{Image binaire}
 La méthode de segmentation la plus simple et la plus rapide est la création d'une image monochrome (aussi appelée \textit{binaire}) par seuillage: \`A partir de l'image originale convertie en niveaux de gris, on la transforme comparativement à une valeur seuil prédéterminée en une image binaire où chaque pixel prendra une des deux valeurs possibles.\\
@@ -378,7 +371,7 @@ De même, en évaluant la dérivée seconde par application du Laplacien (\ref{f
 \item déterminer le milieu exacte de la frontière floutée. En calculant la droite imaginaire (\ref{fig:DetectionDiscontinuities} \textit{c}, ligne pointillée) joignant les extremums de la dérivée seconde, on obtient au passage à zéro le point médian.\\
 \end{itemize}
 
-Le filtre Canny est un des algorithmes les plus utilisés pour la détection des contours, il se base sur l'intensité et la direction du gradient. \\
+Le filtre Canny est un des algorithmes les plus utilisés pour la détection des contours, il se base sur l'intensité et la direction du gradient. 
 
 \subsection{Extraction}
 
@@ -432,7 +425,7 @@ où
 \item[]$I$ est une image en niveau de gris.
 \item[]$\texttt{w}(u,v)$ spécifie la taille de la fenêtre considérée, vaudra $1$ quand on se trouve dans la région d'intérêt, $0$ sinon.
 \item[]$x$,$y$ est la quantité de déplacement dans une direction.
-\item[]Une grande variation de $E$ dans la direction de $(x,y)$ dénote un trait d'intérêt.\\
+\item[]Une grande variation de $E$ dans la direction de $(x,y)$ dénote un trait d'intérêt.
 \end{itemize}
 
 \subsubsection{Flux Optique}
@@ -459,31 +452,32 @@ $$\vec v \cdot \nabla I + \frac{\partial I}{\partial t} = 0 $$
 \end{figure}
 
 \subsection{Analyses et suivi}
-Cette étape a pour objectif la comparaison des zones d'intérêts et la reconnaissance de celles-ci comme consistantes.
+Cette étape a pour objectif la comparaison des zones d'intérêt et la reconnaissance de celles-ci comme consistantes.
 
-Le suivi de cibles s'apparente à l'étiquetage d'objet comme unique, au travers du flux vidéo, c'est la reconnaissance des cibles dans la séquence d'image. \\
+Le suivi de cibles s'apparente à l'étiquetage d'objets comme uniques, au travers du flux vidéo, c'est la reconnaissance des cibles dans la séquence d'image. \\
 
-Pour en arriver au suivi d'objets, on aura effectué deux étapes, la localisation de cibles par segmentation et leur représentation par extraction de traits d'intérêt.
+Pour en arriver au suivi d'objets, on aura dû effectuer la localisation de cibles par segmentation et leur représentation par extraction de traits d'intérêt.
+Les images y ont été réduites aux traits essentiels permettant une caractérisation relativement robuste des cibles. 
 
-Le procédé de suivi sera caractérisé par les opérations de filtrage et d'association de données.  \\
+Le procédé de suivi sera alors caractérisé par les opérations de \emph{filtrage} et d'\emph{association de données}.  \\
 
-Les images ont été réduites aux traits essentiels permettant une caractérisation relativement robuste des cibles. 
+Le processus de reconnaissance est opéré à partir des descripteurs précédemment extraits dont on aura estimé l'évolution suivant notamment leur dynamique. Il y a donc la création d'une prédiction à partir de laquelle sera évaluée la correspondance avec l'observation de l'image au moment présent. 
 
-Le processus de reconnaissance est opéré à partir des descripteurs précédemment extraits dont on aura estimé l'évolution suivant notamment sa dynamique. Il y a donc la création d'une prédiction à partir de laquelle sera évalué la correspondance avec l'observation de l'image au moment présent. 
+\paragraph{Évaluation et filtrage}
+Parmi les filtres les plus courant, il y a le filtre de Kalman et les filtres à particules.
 
-\paragraph{Méthodes d'évaluation des associations de descripteurs et de filtrage}
-Parmi les filtres les plus courant, il y a le filtre de Kalman et les filtres à particule.
-Le filtre condensation sera décrit plus en détails dans le chapitre "Méthode implémentées". \\  
+Le filtre de Kalman est décrit comme ayant de bons résultats pour des systèmes à dynamique linéaire ou unimodale, typiquement gaussienne. L'approche par filtres à particules semble plus indiquée dans le cadre du suivi de cibles, car la prédiction de l'état courant doit prendre en compte toutes les alternatives possibles simultanément, en ce sens, la dynamique du système y est multimodale.
+Le filtre \textit{condensation} sera décrit plus en détails dans le chapitre "Méthodes implémentées". \\  
 
 Il existe de nombreuses façon d'évaluer la correspondance de données. 
-
-Parmi les méthodes, pouvant faire office de fonctions de mérite, les plus connue: 
-La distance de Mahalanobis et la distance euclidienne. Nous avons utilisé la distance euclidienne.
+Pour évaluer la correspondance, on compare les données dans une zone probable et on retient comme potentiellement correspondant les données pour lesquels on obtient la différence minimale.
+ 
+Parmi les méthodes les plus connues, pouvant faire office de fonctions de mérite ou de corrélation: 
+La distance de Mahalanobis et la distance euclidienne. 
+Du fait de la simplicité d'implémentation pour un résultat satisfaisant, le calcul de la distance euclidienne a été utilisé.
 
 \subsubsection{Distance euclidienne}
-Correspondance par calcul de la distance euclidienne entre 2 pixels :
-
-Ce n'est rien d'autre que la racine carrée de la somme du carré des différences en niveau de gris dans une zone $n*n$ autour des 2 pixels.
+La correspondance par calcul de la distance euclidienne entre $2$ pixels n'est rien d'autre que la racine carrée de la somme du carré des différences en niveau de gris dans une zone $n*n$ autour des $2$ pixels.
 
 $$ \sqrt{\sum_{i=0}^{n}\sum_{j=0}^{n}(a_{i,j} - b_{i,j})^2} $$
 
@@ -638,14 +632,14 @@ Suite à ce qui a été énoncé, il est intéressant de dégager quelques exige
 %	Méthodes implémentées : Condensation
 %----------------------------------------------------------------------------------------
 \section{Conditionnal Density Propagation}
-\paragraph{Introduction}
+\subsection{Introduction}
 Afin de suivre un objet en mouvement au travers d'un flux vidéo, on doit être en mesure de déterminer à chaque \textit{frame} la position de la cible. 
-Cette détermination est rarement exacte car elle s'appuie sur de nombreuses mesures, pour la plus part instables. 
-La déformation de la cible, son occlusion, des changements de luminosité, etc, sont autant de mesures dont la propension à varier aléatoirement contribue à la génération de bruit dans la détermination de la cible.\\
+Cette détermination est rarement exacte car elle s'appuie sur de nombreuses mesures, pour la plupart instables. 
+La déformation de la cible, son occlusion, des changements de luminosité, etc, sont autant de mesures dont la propension à varier aléatoirement contribue à la génération de \emph{bruit} dans la détermination de la cible.\\
 
 Un des objectifs de la méthode est d'approcher l'hypothétique détermination réelle qui aurait été obtenue aux moyens de mesures idéales. 
 
-C'est-à-dire, défini négativement, la méthode devrait être en mesure de mettre en exergue le tout ou une partie de la cible comme n'appartenant pas au bruit.\\
+Autrement dit, la méthode devrait être en mesure de mettre en exergue le tout ou une partie de la cible comme n'appartenant pas au \emph{bruit}.\\
 
 Le processus de détermination se base sur un mouvement cyclique. Partant d'un modèle donné dont la paramétrisation est issue d'observations antérieurs, on consolide ce modèle en évaluant sa pertinence à l'état présent. Ce mouvement conduit à une prédiction sur l'état probable à l'étape suivant.\\ 
 On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation}. 
@@ -661,13 +655,13 @@ On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation
 \caption{Cycle de prédiction - observation}
 \end{figure}
 
-\paragraph{Filtre à particules}
-L'algorithme \textit{condensation} appartient à la classe des filtres particulaires/filtres à particules. Les filtres à particules sont à rapprocher des méthodes de Monte-Carlo séquentielles du fait notamment qu'ils utilisent des techniques probabilistes afin d'atteindre leur but.
+\subsection{Filtre à particules}
+L'algorithme \textit{condensation} appartient à la classe des filtres particulaires/filtres à particules. Les filtres à particules sont une forme de méthode statistique permettant l'estimation de l'état d'un système.  Aussi appelé méthodes  de Monte-Carlo séquentielles, ils sont à base de techniques probabilistes facilitant la mesure d'un état qui n'est pas toujours directement observable.
 \textit{Condensation} contient en plus une approche bayésienne dans son processus de calcul.\\
 
-L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessite une discrétisation de l'espace du problème, augmentant alors la complexité de recherche de la solution.
+L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème qui a pour résultat d'augmenter la complexité de la recherche de la solution.
 
-Les méthodes Monte-carlo séquentielles sont des méthodes fondées sur des simulations numériques permettant le calcul de distribution a posteriori. La discrétisation de l'espace des possibles est alors adapté à la forme de la densité.
+Les méthodes Monte-carlo dites séquentielles sont fondées sur des simulations numériques permettant le calcul de distribution a posteriori. La discrétisation de l'espace des possibles est alors adapté à la forme de la densité.
 
 Les composantes du filtre particulaire apposé au suivi d'objets sont:
 \begin{enumerate}
@@ -686,17 +680,17 @@ L'algorithme \textit{condensation} propose donc d'approcher l'état du système 
  
 À partir d'une connaissance a priori du système et d'observations desquelles peut être caractérisée la variabilité statistique des données $z$ d'une image relativement à l'état de l'objet $x$, la distribution a posteriori peut être estimée pour $x_t$ étant donné $z_t$ au temps $t$.\\
 
-\paragraph{Chaîne Markov}
+\subsection{Chaîne Markov}
 L'hypothèse est faite que la dynamique des objets forme une chaîne de Markov telle que $$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$$
 Le processus stochastique vérifie la propriété de Markov si et seulement si la distribution conditionnelle de probabilité des états futurs, étant donné les états passés et l'état présent, ne dépend en fait que de l'état présent et non pas des états passés. On parle d'absence de mémoire au sein du processus.
 
 
-\paragraph{Approche bayésienne}
+\subsection{Approche bayésienne}
 L'approche bayésienne part de la densité a posteriori (formule), mais elle n'est pas toujours connue a priori
 
 Soit une fonction de vraisemblance $f(x_1, \ldots , x_n | \theta) = \prod_{i=1}^{n} f(x_i ; \theta)  $
 En un sens la fonction de vraisemblance est donc le contraire d'une fonction de densité de probabilité a posteriori en ce qu'elle donne, en fonction des observations xj connues, une information sur les valeurs susceptibles d'être prises par les paramètres $\theta_i$
-La prédiction doit prendre en compte toutes les alternatives possibles simultanément.
+
 L'algorithme Condensation s'attache à approcher l'état observé à partir de la probabilité d'avoir telle dynamique de l'objet (prédiction) sachant l'ensemble des mesures passées. L'ensemble des mesures passées peut être ramené à l'observation précédente, en effet elle représente tout l'historique de l'état du système 
 
   
@@ -710,6 +704,7 @@ reconstruire la trajectoire d'attributs dans une séquence d'images \\
 \item[La dynamique] stochastique du système (équation de transition) est entièrement donnée par $$P(\mathbf{x}_t|\mathbf{x}_{t-1})$$ (processus Markovien)
 \item[Les invariants] sont les caractéristiques locales de luminance ou géométrique.
 \end{description}
+
 \subsection{Dynamique du système}
 \paragraph{Dynamique Stochastique}
 L'état $\mathbf{x}$ est multidimensionnel et sa densité est plutot complexe.
