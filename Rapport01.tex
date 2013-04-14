@@ -632,6 +632,22 @@ Suite à ce qui a été énoncé, il est intéressant de dégager quelques exige
 %----------------------------------------------------------------------------------------
 %	Méthodes implémentées : Condensation
 %----------------------------------------------------------------------------------------
+\section{Segmentation, traits d'intérêt et comparaison}
+En liaison à l'implémentation de l'algorithme \textit{condensation}, différentes procédures, telles que décrites dans le chapitre précédent, ont été réalisées.\\
+
+L'algorithme \textit{condensation}, qui effectue la principale tache du suivi de cibles, reste ouvert sur les traitements annexes possibles quant au contexte dans lequel il s'effectue. 
+
+Entre autres, les choix et les procédés d'extraction des traits d'intérêts, ainsi que la méthode d'estimation de la correspondance entre prédiction et observations, peuvent être réalisés de différentes façons.\\
+
+L'extraction de l'avant-plan, la transformation en image binaire et la détection de contours ont été implémentées en vue de discerner les zones potentiellement intéressantes.
+
+L'extraction de traits d'intérêts et l'estimation du mouvement (vitesse et direction) ont été utilisée pour la définition de descripteurs pour chaque cible.
+
+La correspondance a majoritairement été assurée par le calcul de la distance euclidienne.\\
+
+Les descriptions de ces procédures ont été explicité dans le chapitre précédent.
+
+
 \section{Conditionnal Density Propagation}
 \subsection{Introduction}
 Afin de suivre un objet en mouvement au travers d'un flux vidéo, on doit être en mesure de déterminer à chaque \textit{frame} la position de la cible. 
@@ -709,6 +725,7 @@ L'algorithme \textit{condensation} propose donc d'approcher l'état du système 
 L'hypothèse est faite que la dynamique des objets forme une chaîne de Markov telle que $$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$$
 Le processus stochastique possède la propriété de Markov si la distribution conditionnelle de probabilités des états futurs, étant donné les états passés et l'état présent, ne dépend que de l'état présent et non pas des états passés. 
 On parle d'absence de mémoire au sein du processus.
+La dynamique future de l'objet ne dépend pas de la séquence passée, mais uniquement de la frame  au temps présent.
 
 
 \subsection{Approche bayésienne}
@@ -729,6 +746,8 @@ où,
 \item[] l'a priori est $P(\mathbf{x}_{t+1}|\mathbf{x}_{t})$\\
 \end{itemize}
 
+La densité a posteriori est exprimable comme fonction de l'\textit{observation} (évaluation de vraisemblance) et de la loi de \textit{transition}.
+
 \subsection{Observation}
 Les observations $\mathbf{z}_t$ sont indépendantes entre-elles et vis-à-vis du processus dynamique:
 $$P(\mathcal{Z}_{1:t-1},\mathbf{x}_t|\mathcal{X}_{0:t-1}) = P(\mathbf{x}_t|\mathcal{X}_{0:t-1})\prod_{t=1}^{t-1} P(\mathbf{z}_t|\mathbf{x}_t)$$
@@ -744,7 +763,7 @@ où $k$ représente une constante de normalisation ne dépendant pas de $\mathbf
 La densité \textit{a priori} $P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$ est une prédiction issue de la densité \textit{a posteriori} $P(\mathbf{x}_{t-1}|\mathcal{Z}_{1:t-1})$ provenant de l'étape précédente et à laquelle a été surimposé un pas de temps du modèle dynamique.
 La règle de propagation est alors $$P(\mathbf{x}_t|\mathbf{z}_t) = kP(\mathbf{z}_t|\mathbf{x}_t)P(\mathbf{x}_t)$$
 Pour atteindre cette densité \textit{a priori} tout en évitant un coût computationnel conséquent, celle-ci est approchée de façon récursive par échantillonnage pondéré.\\
-
+\pagebreak
 \subsection{Algorithme}
 
 L'hypothèse du processus markovien et l'approche bayésienne posées, on défini récursivement l'estimation du système comme:
@@ -756,6 +775,13 @@ L'approximation récursive se déroule suivant le canevas:
 \cellcolor[gray]{0.9} Prédiction & $\rightarrow$ & \cellcolor[gray]{0.9} Mesure & $\rightarrow$ & \cellcolor[gray]{0.9} Échantillonnage \\  
 \end{tabular} 
 \end{center}
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.45]{figureCondensationAlgo.png}
+\caption{Visualisation d'un pas de l'algorithme}
+\end{figure}
+
 
 \subsubsection{Prédiction}
 La prédiction de la position d'une nouvelle particule $\mathbf{s'}_{t}^{(k)}$ est obtenue à partir de la densité a priori $P(\mathbf{x}_{t}|\mathbf{x}_{t-1})$ 
@@ -819,8 +845,22 @@ On obtient un vecteur $$S_{t}=\{ \mathbf{s}_{t}^{(i)}, \pi_{t}^{(i)}, i=1,\cdots
 	\end{enumerate}
 \end{enumerate}
 
-\chapter{Discussion}
 
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.5]{screenshots/condensate14.png}
+\caption{Condensate}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.5]{screenshots/condensate24.png}
+\caption{Condensate}
+\end{figure}
+
+
+\chapter{Discussion}
 %----------------------------------------------------------------------------------------
 %	Discussion
 %----------------------------------------------------------------------------------------
