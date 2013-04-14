@@ -641,28 +641,44 @@ Entre autres, les choix et les procédés d'extraction des traits d'intérêts, 
 
 L'extraction de l'avant-plan, la transformation en image binaire et la détection de contours ont été implémentées en vue de discerner les zones potentiellement intéressantes.
 
-L'extraction de traits d'intérêts et l'estimation du mouvement (vitesse et direction) ont été utilisée pour la définition de descripteurs pour chaque cible.
+L'extraction de traits d'intérêts et l'estimation du mouvement (vitesse et direction) ont été utilisées pour établir les descripteurs de chaque cible.
 
-La correspondance a majoritairement été assurée par le calcul de la distance euclidienne.\\
+La maximisation de la correspondance, c'est-à-dire la recherche de la différence minimale, a majoritairement été assurée par le calcul de la distance euclidienne.\\
 
 Les descriptions de ces procédures ont été explicité dans le chapitre précédent.
 
 
 \section{Conditionnal Density Propagation}
 \subsection{Introduction}
-Afin de suivre un objet en mouvement au travers d'un flux vidéo, on doit être en mesure de déterminer à chaque \textit{frame} la position de la cible. 
-Cette détermination est rarement exacte car elle s'appuie sur de nombreuses mesures, pour la plupart instables. 
-La déformation de la cible, son occlusion, des changements de luminosité, etc, sont autant de mesures dont la propension à varier aléatoirement contribue à la génération de \emph{bruit} dans la détermination de la cible.\\
+
+Vulgairement, l'algorithme disperse, suivant une certaine probabilité, une suite de particules autour d'un trait d'intérêt. 
+
+La correspondance de chacune des particules avec les observations est évaluée et donne un poids. 
+
+Il en résulte une pondération des particules qui vient, après ré-échantillonnage, affiner la prédiction pour l'étape suivante. 
+
+Le ré-échantillonnage évince les particules à faible probabilité. 
+
+Le processus récursif fait converger les particules vers le trait de correspondance maximale.\\
+
+Concrètement, afin de suivre un objet en mouvement au travers d'un flux vidéo, on doit être en mesure de déterminer à chaque \textit{frame} la position de la cible. 
+
+C'est un processus d'anticipation sur le futur, où on peut soit évaluer toutes les possibilités, soit inférer à partir de ce qu'on connait et réduire au maximum le nombre de possibilités à tester. 
+
+La détermination est rarement exacte car d'une part, la situation à évaluer est généralement d'une grande complexité et d'autre part, le processus de détermination s'appuie sur de nombreuses mesures, pour la plupart instables. 
+
+La déformation de la cible, son occlusion, des changements de luminosité, etc, sont autant de mesures dont la propension à varier aléatoirement contribue à la génération de \emph{bruit} dans la détermination de la cible.\\  
 
 Un des objectifs de la méthode est d'approcher l'hypothétique détermination réelle qui aurait été obtenue aux moyens de mesures idéales. 
 
 Autrement dit, la méthode devrait être en mesure de mettre en exergue le tout ou une partie de la cible comme n'appartenant pas au \emph{bruit}.\\
 
-Le processus de détermination se base sur un mouvement cyclique. Partant d'un modèle donné dont la paramétrisation est issue d'observations antérieurs, on consolide ce modèle en évaluant sa pertinence à l'état présent. Ce mouvement conduit à une prédiction sur l'état probable à l'étape suivant.\\ 
+Le processus de détermination se base sur un mouvement cyclique. Partant d'un modèle donné dont la paramétrisation est issue d'observations antérieurs, on consolide ce modèle en évaluant sa pertinence à l'état présent. Ce mouvement conduit à une prédiction sur l'état probable à l'étape suivante.\\ 
+
 On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation}. 
 \begin{description}
-\item [La prédiction] est basée sur un modèle affiné par les informations passées.
-\item [L'observation] ou phase de mesure, est la récolte d'informations sur l'état courant du système en vue de corriger la prédiction basée sur les mesures précédentes.\\
+\item [La prédiction] est basée sur un modèle affiné par les informations passées, en vue d'\textit{estimer} l'état a posteriori.
+\item [L'observation] ou phase de mesure, est la récolte d'informations sur l'état courant du système en vue de \textit{corriger} la prédiction basée sur les mesures précédentes.\\
 \end{description}
  
 \begin{figure}[H]
@@ -677,20 +693,20 @@ On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation
 \item[L'image] globale au moment $k$ est notée $I_k$, son historique est l'ensemble $$I_{0:n}=\{I_k, k=0,\cdots,n\}$$
 \item[L'objet] est la zone d'intérêt dans l'image dont on souhaite faire le suivi.
 \item[l'état de l'objet] $\mathbf{x}$ au temps $t$ est noté $\mathbf{x}_t$ et son historique est l'ensemble $$\mathcal{X}_{0:t} = \{\mathbf{x}_0,...,\mathbf{x}_t\}$$
-\item[Les observations] est l'ensemble des \textit{features} (traits \textit{invariants}, aussi dit "les observations") est $\mathbf{z}_t$ et son historique $$ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$$
-\item[La dynamique] stochastique du système (équation de transition) est entièrement donnée par $$P(\mathbf{x}_t|\mathbf{x}_{t-1})$$ (processus Markovien)
+\item[Les observations] sont l'ensemble des \textit{features} (traits \textit{invariants}) aussi dit le \emph{descripteur}  $\mathbf{z}_t$ et son historique $$ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$$
+\item[La dynamique] stochastique de l'objet est entièrement donnée par $$P(\mathbf{x}_t|\mathbf{x}_{t-1})$$ (processus Markovien)
 \item[Les invariants] sont les caractéristiques locales de luminance ou géométrique.
 \end{description}
 
 \subsection{Filtre à particules et Monte-Carlo}
-L'algorithme \textit{condensation} appartient à la classe des filtres particulaires/filtres à particules. 
+L'algorithme \textit{condensation} appartient à la classe des filtres particulaires. 
 
 Les filtres à particules, aussi appelé méthodes  de Monte-Carlo séquentielles, s'appuient sur des méthodes statistiques. Ils ont pour dessein l'estimation de l'état d'un système donné et qui n'est pas toujours directement observable.
 \textit{Condensation} contient en plus une approche bayésienne dans son processus d'approximation de l'état à calculer.\\
 
-L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème qui a pour résultat d'augmenter la complexité de la recherche de la solution. Les techniques et optimisations probabilistes simplifie alors la recherche de solutions.
+L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème. Cette discrétisation a pour effet d'augmenter la complexité de la recherche de solutions. Les techniques et optimisations probabilistes simplifie cette recherche de solutions.
 
-Les méthodes Monte-Carlo dites séquentielles sont fondées sur des simulations numériques permettant le calcul d'une distribution a posteriori. La discrétisation de l'espace des possibles est alors borné à une densité donnée.\\
+Les méthodes Monte-Carlo dites séquentielles sont fondées sur des simulations numériques facilitant aussi le calcul d'une distribution a posteriori. La discrétisation de l'espace des possibles est alors comme borné par une densité donnée.\\
 
 Les composantes du filtre particulaire apposé au suivi d'objets sont:
 \begin{enumerate}
@@ -698,9 +714,9 @@ Les composantes du filtre particulaire apposé au suivi d'objets sont:
 \item[] L'image entière est définie comme un système complexe dont l'évolution se manifeste de façon discrète au travers de la séquence vidéo.
 \item La cible que l'on souhaite suivre est un état caché $\mathbf{x}_k$ duquel on peut postuler l'existence:
 	\begin{itemize}
-	\item d'une suite d'état $\mathbf{x}_1,\cdots,\mathbf{x}_n$ corrélée à une suite des instants $t_0,\cdots,t_n$ 
+	\item d'une suite d'états $\mathbf{x}_1,\cdots,\mathbf{x}_n$ corrélée à une suite d'instants $t_0,\cdots,t_n$ 
 	\item d'un état initial $\mathbf{x}_0$ muni d'une \textit{loi initiale}  $P(\mathbf{x}_0)$
-	\item d'une \textit{loi de transition} ou d'\textit{évolution} d'un état $\mathbf{x}_t$ à $\mathbf{x}_{t+1}$, soit $P(\mathbf{x}_t|\mathbf{x}_{t-1})$
+	\item d'une \textit{loi de transition} ou d'\textit{évolution} d'un état $\mathbf{x}_{t-1}$ à $\mathbf{x}_{t}$, soit $P(\mathbf{x}_t|\mathbf{x}_{t-1})$
 \end{itemize}
 \item Une loi d'\textit{observation} $P(\mathbf{z}_{t+\tau}|\mathbf{x}_{t+\tau})$\\
 \end{enumerate}
@@ -723,9 +739,9 @@ L'algorithme \textit{condensation} propose donc d'approcher l'état du système 
 
 \subsection{Chaîne Markov}
 L'hypothèse est faite que la dynamique des objets forme une chaîne de Markov telle que $$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$$
-Le processus stochastique possède la propriété de Markov si la distribution conditionnelle de probabilités des états futurs, étant donné les états passés et l'état présent, ne dépend que de l'état présent et non pas des états passés. 
+Le processus stochastique possède la propriété de Markov si la distribution conditionnelle de probabilités des états futurs, étant donné les états passés et l'état présent, ne dépend que de l'état présent. 
 On parle d'absence de mémoire au sein du processus.
-La dynamique future de l'objet ne dépend pas de la séquence passée, mais uniquement de la frame  au temps présent.
+La dynamique future de l'objet ne dépend pas de la séquence passée, mais uniquement de son état au temps présent.
 
 
 \subsection{Approche bayésienne}
@@ -760,10 +776,10 @@ Le processus d'observation est alors défini en spécifiant la densité conditio
 Selon le théorème de Bayes, on déduit la règle de propagation de la densité de l'état dans le temps comme  
 $$P(\mathbf{x}_{t}|\mathcal{Z}_{t}) = k_t P(\mathbf{z}_t|\mathbf{x}_t)P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$$
 où $k$ représente une constante de normalisation ne dépendant pas de $\mathbf{x}_t$.\\
-La densité \textit{a priori} $P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$ est une prédiction issue de la densité \textit{a posteriori} $P(\mathbf{x}_{t-1}|\mathcal{Z}_{1:t-1})$ provenant de l'étape précédente et à laquelle a été surimposé un pas de temps du modèle dynamique.
+La densité \textit{a priori} $P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$ est une prédiction issue de la densité \textit{a posteriori} $P(\mathbf{x}_{t-1}|\mathcal{Z}_{1:t-1})$ à laquelle a été surimposé un pas de temps du modèle dynamique (temporalité indépendante du flux vidéo).
 La règle de propagation est alors $$P(\mathbf{x}_t|\mathbf{z}_t) = kP(\mathbf{z}_t|\mathbf{x}_t)P(\mathbf{x}_t)$$
 Pour atteindre cette densité \textit{a priori} tout en évitant un coût computationnel conséquent, celle-ci est approchée de façon récursive par échantillonnage pondéré.\\
-\pagebreak
+
 \subsection{Algorithme}
 
 L'hypothèse du processus markovien et l'approche bayésienne posées, on défini récursivement l'estimation du système comme:
@@ -827,21 +843,25 @@ On obtient un vecteur $$S_{t}=\{ \mathbf{s}_{t}^{(i)}, \pi_{t}^{(i)}, i=1,\cdots
 %----------------------------------------------------------------------------------------
 %	Résultats expérimentaux
 %----------------------------------------------------------------------------------------
+
+\textit{Condensation} est décrit en utilisant des \textit{splines} pour descripteurs \cite{a}. le choix a été fait de baser le suivi sur des points robustes non mis en relation, à la manière d'un \textit{blob}.
+
+La trame de la solution esquissée par le présent travail se décrit comme suit:
 \begin{enumerate}
 	\item Détection de cible
 	\begin{enumerate}
 		\item Segmentation
-		\item Choisir des points intéressants
-		\item Garder la cible en mémoire
+		\item Sélection des points intéressants
+		\item Mémorisation de la cible
 	\end{enumerate}
 	\item Suivi de cible
 	\begin{enumerate}
-		\item Retrouver les points intéressants
+		\item Identification des points intéressants
 		\begin{enumerate}
 			\item Choix de candidats selon une distribution
-			\item Election du meilleur candidat (première passe + resampling)
+			\item Élection du meilleur candidat: première passe et ré-échantillonnage
 		\end{enumerate}
-		\item Elimination des points non robustes ou perdus
+		\item Élimination des points non robustes ou perdus
 	\end{enumerate}
 \end{enumerate}
 
