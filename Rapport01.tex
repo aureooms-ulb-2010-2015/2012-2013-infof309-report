@@ -4,7 +4,7 @@
 
 \documentclass[a4paper,12pt]{report}
 \usepackage[francais]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ucs}
 \usepackage{url}
@@ -51,7 +51,7 @@
 \section{Motivation}
 
 L'analyse logicielle vient de plus en plus appuyer le travail de ceux pour qui la récolte d'informations provient essentiellement d'une source numérique, i.e des vidéos enregistrées lors d'observations menées par des biologistes ou statisticiens, etc.
- 
+
 L'usage de procédés automatisés permet le filtrage et l'analyse massive de données qui était jusqu'alors une tâche fastidieuse à traiter. Données qui une fois traitées permettent d'inférer ou d'appuyer des thèses selon les besoins.
 
 Par exemple, l'analyse des déplacements individuels au sein d'un banc de poissons filmé pendant un longue période est une tache pour laquelle le passage par un traitement informatisé apparaît comme nécessaire.\\
@@ -85,7 +85,7 @@ Il existe un grand nombre d'approche pour traiter la détection et le suivi d'ob
 Il est nécessaire de prendre connaissance de ces différentes approches et leur évolution, ainsi que des bénéfices ou contraintes qu'elles induisent. D'autre part le sujet étant prolixe, nous limiterons ici l'exposé des méthodes de détection et de suivi à celles que nous avons utilisée ou celles qui nous sont, à un moment ou l'autre, apparues importantes pour traiter de la problématique qui nous occupe.
 
 \section{Contexte, matériaux et questions}
-Une vidéo est un flux, une succession d'images, dites  \textit{frames}. Le flux est dépendant de la fréquence de lecture/d'affichage, soit un taux en fps (\textit{frames per second}). 
+Une vidéo est un flux, une succession d'images, dites  \textit{frames}. Le flux est dépendant de la fréquence de lecture/d'affichage, soit un taux en $fps$ (\textit{frames per second}). 
 
 Suivre une cible au long d'une séquence d'images, c'est définir et reconnaître une partie de l'image courante comme identique à la précédente, tout en lui autorisant des modifications (taille, position, couleur,...). Rétroactivement, c'est aussi reconstruire la trajectoire d'une cible dans la séquence d'images, cette approche se montrera pertinente pour la suite.\\
 
