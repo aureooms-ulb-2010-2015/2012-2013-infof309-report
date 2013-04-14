@@ -12,6 +12,7 @@
 \usepackage[table]{xcolor}
 \usepackage{mathtools,amssymb,amsthm}%
 \usepackage[left=2.5cm,top=2cm,right=2.5cm,nohead,nofoot]{geometry}
+\usepackage{float}
 \linespread{1.1}
 
 \begin{document}
@@ -648,53 +649,13 @@ On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation
 \item [L'observation] ou phase de mesure, est la récolte d'informations sur l'état courant du système en vue de corriger la prédiction basée sur les mesures précédentes.\\
 \end{description}
  
-\begin{figure}[hbtp]
+\begin{figure}[H]
 
 \includegraphics[scale=0.5]{figurePredictionObservationCycle.png}
 \centering
 \caption{Cycle de prédiction - observation}
 \end{figure}
 
-\subsection{Filtre à particules}
-L'algorithme \textit{condensation} appartient à la classe des filtres particulaires/filtres à particules. Les filtres à particules sont une forme de méthode statistique permettant l'estimation de l'état d'un système.  Aussi appelé méthodes  de Monte-Carlo séquentielles, ils sont à base de techniques probabilistes facilitant la mesure d'un état qui n'est pas toujours directement observable.
-\textit{Condensation} contient en plus une approche bayésienne dans son processus de calcul.\\
-
-L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème qui a pour résultat d'augmenter la complexité de la recherche de la solution.
-
-Les méthodes Monte-carlo dites séquentielles sont fondées sur des simulations numériques permettant le calcul de distribution a posteriori. La discrétisation de l'espace des possibles est alors adapté à la forme de la densité.
-
-Les composantes du filtre particulaire apposé au suivi d'objets sont:
-\begin{enumerate}
-\item La séquence d'image $I_0,\cdots,I_n$ à des instants $t_0<\cdots<t_n$ est une suite d'observations $\mathbf{z}_t$ appartenant à $ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$.
-\item[] L'image entière est définie comme un système complexe dont l'évolution se manifeste de façon discrète au travers de la séquence vidéo.
-\item La cible que l'on souhaite suivre est un état caché $\mathbf{x}_k$ duquel on peut postuler l'existence:
-	\begin{itemize}
-	\item d'une suite d'état $\mathbf{x}_1,\cdots,\mathbf{x}_n$
-	\item d'un état initial $\mathbf{x}_0$ muni d'une loi initiale
-	\item d'une \textit{loi de transition} $P(\mathbf{x}_t|\mathbf{x}_{t-1})$
-\end{itemize}
-\item \textit{Loi de proposition} caractérisant la relation entre l'état de l'objet et l'observation $\pi(\mathbf{x}_k|\mathcal{Z}_{1:k})$\\
-\end{enumerate}
-
-L'algorithme \textit{condensation} propose donc d'approcher l'état du système a posteriori en utilisant une connaissance a priori de celui-ci.
- 
-À partir d'une connaissance a priori du système et d'observations desquelles peut être caractérisée la variabilité statistique des données $z$ d'une image relativement à l'état de l'objet $x$, la distribution a posteriori peut être estimée pour $x_t$ étant donné $z_t$ au temps $t$.\\
-
-\subsection{Chaîne Markov}
-L'hypothèse est faite que la dynamique des objets forme une chaîne de Markov telle que $$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$$
-Le processus stochastique vérifie la propriété de Markov si et seulement si la distribution conditionnelle de probabilité des états futurs, étant donné les états passés et l'état présent, ne dépend en fait que de l'état présent et non pas des états passés. On parle d'absence de mémoire au sein du processus.
-
-
-\subsection{Approche bayésienne}
-L'approche bayésienne part de la densité a posteriori (formule), mais elle n'est pas toujours connue a priori
-
-Soit une fonction de vraisemblance $f(x_1, \ldots , x_n | \theta) = \prod_{i=1}^{n} f(x_i ; \theta)  $
-En un sens la fonction de vraisemblance est donc le contraire d'une fonction de densité de probabilité a posteriori en ce qu'elle donne, en fonction des observations xj connues, une information sur les valeurs susceptibles d'être prises par les paramètres $\theta_i$
-
-L'algorithme Condensation s'attache à approcher l'état observé à partir de la probabilité d'avoir telle dynamique de l'objet (prédiction) sachant l'ensemble des mesures passées. L'ensemble des mesures passées peut être ramené à l'observation précédente, en effet elle représente tout l'historique de l'état du système 
-
-  
-reconstruire la trajectoire d'attributs dans une séquence d'images \\
 \subsection{Notation}
 \begin{description}
 \item[L'image] globale au moment $k$ est notée $I_k$, son historique est l'ensemble $$I_{0:n}=\{I_k, k=0,\cdots,n\}$$
@@ -705,36 +666,134 @@ reconstruire la trajectoire d'attributs dans une séquence d'images \\
 \item[Les invariants] sont les caractéristiques locales de luminance ou géométrique.
 \end{description}
 
-\subsection{Dynamique du système}
-\paragraph{Dynamique Stochastique}
-L'état $\mathbf{x}$ est multidimensionnel et sa densité est plutot complexe.
-Pour construire un  modèle dynamique, une connaissance \textit{a priori} du mouvement est nécessaire.
-\paragraph{Observation}
+\subsection{Filtre à particules et Monte-Carlo}
+L'algorithme \textit{condensation} appartient à la classe des filtres particulaires/filtres à particules. 
+
+Les filtres à particules, aussi appelé méthodes  de Monte-Carlo séquentielles, s'appuient sur des méthodes statistiques. Ils ont pour dessein l'estimation de l'état d'un système donné et qui n'est pas toujours directement observable.
+\textit{Condensation} contient en plus une approche bayésienne dans son processus d'approximation de l'état à calculer.\\
+
+L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème qui a pour résultat d'augmenter la complexité de la recherche de la solution. Les techniques et optimisations probabilistes simplifie alors la recherche de solutions.
+
+Les méthodes Monte-Carlo dites séquentielles sont fondées sur des simulations numériques permettant le calcul d'une distribution a posteriori. La discrétisation de l'espace des possibles est alors borné à une densité donnée.\\
+
+Les composantes du filtre particulaire apposé au suivi d'objets sont:
+\begin{enumerate}
+\item La séquence d'image $I_0,\cdots,I_n$ à des instants $t_0<\cdots<t_n$ est une suite d'observations $\mathbf{z}_t$ appartenant à la séquence observée $ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$.
+\item[] L'image entière est définie comme un système complexe dont l'évolution se manifeste de façon discrète au travers de la séquence vidéo.
+\item La cible que l'on souhaite suivre est un état caché $\mathbf{x}_k$ duquel on peut postuler l'existence:
+	\begin{itemize}
+	\item d'une suite d'état $\mathbf{x}_1,\cdots,\mathbf{x}_n$ corrélée à une suite des instants $t_0,\cdots,t_n$ 
+	\item d'un état initial $\mathbf{x}_0$ muni d'une \textit{loi initiale}  $P(\mathbf{x}_0)$
+	\item d'une \textit{loi de transition} ou d'\textit{évolution} d'un état $\mathbf{x}_t$ à $\mathbf{x}_{t+1}$, soit $P(\mathbf{x}_t|\mathbf{x}_{t-1})$
+\end{itemize}
+\item Une loi d'\textit{observation} $P(\mathbf{z}_{t+\tau}|\mathbf{x}_{t+\tau})$\\
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{figureCondensationLois.png}
+\end{figure}
+
+À partir de ces postulats, il est possible de:
+\begin{enumerate}
+\item \textit{Estimer}, c'est-à-dire établir une \textit{loi de proposition} caractérisant la relation entre l'état de l'objet conditionnellement aux observations: $P(\mathbf{x}_t|\mathcal{Z}_{1:t})$
+\item \textit{Filtrer}, soit connaître $P(\mathbf{x}_t|\mathcal{Z}_{1:t+\tau})$
+\item \textit{Prédire}, soit déterminer $P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$\\
+\end{enumerate}
+
+L'algorithme \textit{condensation} propose donc d'approcher l'état du système a posteriori en utilisant une connaissance a priori de celui-ci.
+ 
+À partir d'une connaissance a priori du système et d'observations desquelles peut être caractérisée la variabilité statistique des données $z$ d'une image relativement à l'état de l'objet $x$, la distribution a posteriori $P(\mathcal{X}_{0:t}|\mathcal{Z}_{1:t})$ peut être estimée pour chaque $x_t$ étant donné $z_t$ au temps $t$.\\
+
+\subsection{Chaîne Markov}
+L'hypothèse est faite que la dynamique des objets forme une chaîne de Markov telle que $$P(\mathbf{x}_{t}|\mathcal{X}_{0:t})=P(\mathbf{x}_t|\mathbf{x}_{t-1})$$
+Le processus stochastique possède la propriété de Markov si la distribution conditionnelle de probabilités des états futurs, étant donné les états passés et l'état présent, ne dépend que de l'état présent et non pas des états passés. 
+On parle d'absence de mémoire au sein du processus.
+
+
+\subsection{Approche bayésienne}
+La règle de Bayes est:
+
+$$P(A_i|B) = \frac{P(B | A_i) P(A_i)}{\sum_j P(B|A_j)P(A_j)}$$
+
+où transposée à la problématique du suivi de cible, elle s'écrit:
+
+$$P(\mathcal{X}_{0:t}|\mathcal{Z}_{1:t}) =  \frac{P(\mathcal{Z}_{1:t}|\mathcal{X}_{0:t})P(\mathcal{X}_{0:t})}{\int_{\mathcal{X}_{t+1}}P(\mathcal{Z}_{1:t}|\mathcal{X}_{0:t})P(\mathcal{X}_{0:t})d_{\mathcal{X}_{0:t}}}$$\\
+
+Cette formulation, que le coût computationnel rend impraticable comme telle, devra être résolue de façon récursive. 
+La formulation récursive fait apparaître la notion de vraisemblance et d'a priori sur l'état prédit.
+$$P(\mathcal{X}_{0:t+1}|\mathcal{Z}_{1:t+1}) = P(\mathcal{X}_{0:t}|\mathcal{Z}_{1:t})\frac{P(\mathbf{z}_{t+1}|\mathbf{x}_{t+1})P(\mathbf{x}_{t+1}|\mathbf{x}_{t})}{P(\mathbf{z}_{t+1}|\mathcal{Z}_{1:t})}$$
+où,
+\begin{itemize}
+\item[] la vraisemblance est donnée comme $P(\mathbf{z}_{t+1}|\mathbf{x}_{t+1})$
+\item[] l'a priori est $P(\mathbf{x}_{t+1}|\mathbf{x}_{t})$\\
+\end{itemize}
+
+\subsection{Observation}
 Les observations $\mathbf{z}_t$ sont indépendantes entre-elles et vis-à-vis du processus dynamique:
-$$P(\mathcal{Z}_{t-1},\mathbf{x}_t|\mathcal{X}_{t-1}) = P(\mathbf{x}_t|\mathcal{X}_{t-1})\prod_{t=1}^{t-1} P(\mathbf{z}_t|\mathbf{x}_t)$$
+$$P(\mathcal{Z}_{1:t-1},\mathbf{x}_t|\mathcal{X}_{0:t-1}) = P(\mathbf{x}_t|\mathcal{X}_{0:t-1})\prod_{t=1}^{t-1} P(\mathbf{z}_t|\mathbf{x}_t)$$
 ce qui se réduit, considérant la condition mutuelle d'indépendance des observations, en
-$$P(\mathcal{Z}_{t}|\mathcal{X}_{t}) = \prod_{i=1}^{t} P(\mathbf{z}_i|\mathbf{x}_i)$$
+$$P(\mathcal{Z}_{1:t}|\mathcal{X}_{0:t}) = \prod_{i=1}^{t} P(\mathbf{z}_i|\mathbf{x}_i)$$
 Le processus d'observation est alors défini en spécifiant la densité conditionnelle $P(\mathbf{z}_t|\mathbf{x}_t)$ pour chaque instant $t$
-\paragraph{Propagation}
-\`{A} partir des observations, la densité conditionnelle de l'état au moment $t$ est $P_t(\mathbf{x}_t) \equiv P(\mathbf{x}_t|\mathcal{Z}_t)$. Elle représente toute l'information de l'état pouvant être déduite de l'entièreté du flux de données.\\
+
+\subsection{Propagation}
+\`{A} partir des observations, la densité conditionnelle de l'état au moment $t$ est $P_t(\mathbf{x}_t) \equiv P(\mathbf{x}_t|\mathcal{Z}_ {1:t})$. Elle représente toute l'information de l'état pouvant être déduite de l'entièreté du flux de données.\\
 Selon le théorème de Bayes, on déduit la règle de propagation de la densité de l'état dans le temps comme  
-$$P(\mathbf{x}_{t}|\mathcal{Z}_{t}) = k_t P(\mathbf{z}_t|\mathbf{x}_t)P(\mathbf{x}_t|\mathcal{Z}_{t-1})$$
+$$P(\mathbf{x}_{t}|\mathcal{Z}_{t}) = k_t P(\mathbf{z}_t|\mathbf{x}_t)P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$$
 où $k$ représente une constante de normalisation ne dépendant pas de $\mathbf{x}_t$.\\
-La densité \textit{a priori} $P(\mathbf{x}_t|\mathcal{Z}_{t-1})$ est une prédiction issue de la densité \textit{a posteriori} $P(\mathbf{x}_{t-1}|\mathcal{Z}_{t-1})$ provenant de l'étape précédente et à laquelle a été surimposé un pas de temps du modèle dynamique.
-Pour atteindre cette densité \textit{a priori} tout en évitant un coût computationnel conséquent, celle-ci est approchée de façon récursive.
+La densité \textit{a priori} $P(\mathbf{x}_t|\mathcal{Z}_{1:t-1})$ est une prédiction issue de la densité \textit{a posteriori} $P(\mathbf{x}_{t-1}|\mathcal{Z}_{1:t-1})$ provenant de l'étape précédente et à laquelle a été surimposé un pas de temps du modèle dynamique.
+La règle de propagation est alors $$P(\mathbf{x}_t|\mathbf{z}_t) = kP(\mathbf{z}_t|\mathbf{x}_t)P(\mathbf{x}_t)$$
+Pour atteindre cette densité \textit{a priori} tout en évitant un coût computationnel conséquent, celle-ci est approchée de façon récursive par échantillonnage pondéré.\\
 
-\subsection{\'{E}chantillonnage}
-\subsubsection{Algorithme d'échantillonnage}
-Il s'agit de retrouver un objet de paramétrisation $\mathbf{x}$ à partir d'une densité \textit{a priori} $P(\mathbf{x})$ en utilisant les données observées $\mathbf{z}$ d'une seule image.
-La densité \textit{a posteriori} obtenue par l'application de Bayes est calculée récursivement  
-\subsubsection{Séquence d'images temporelles}
+\subsection{Algorithme}
 
-\subparagraph{Contrainte de flot optique}
-Méthode différentielle construite à partir d'une formulation différentielle d'un critère de corrélation.(ex Shi-Tomasi-kanade)
-\subparagraph{méthode de corrélation}
-Méthode basée sur des critères de corrélation (= fonction de similarité), 
-estimer les déplacements
-sensible au transformations géométriques (changement d'échelle, rotation, distorsion perspective) et photométrique de l'image
+L'hypothèse du processus markovien et l'approche bayésienne posées, on défini récursivement l'estimation du système comme:
+$$\mathtt{Est}(t) = P(\mathbf{z}_{t}|\mathbf{x}_{t})*P(\mathbf{x}_{t}|\mathbf{x}_{t-1})*\mathtt{Est}(t-1)$$
+
+L'approximation récursive se déroule suivant le canevas:
+\begin{center}
+\begin{tabular}{ c c c c c } 
+\cellcolor[gray]{0.9} Prédiction & $\rightarrow$ & \cellcolor[gray]{0.9} Mesure & $\rightarrow$ & \cellcolor[gray]{0.9} Échantillonnage \\  
+\end{tabular} 
+\end{center}
+
+\subsubsection{Prédiction}
+La prédiction de la position d'une nouvelle particule $\mathbf{s'}_{t}^{(k)}$ est obtenue à partir de la densité a priori $P(\mathbf{x}_{t}|\mathbf{x}_{t-1})$ 
+
+où 
+\begin{itemize}
+\item[] $P(\mathbf{x}_{t}|\mathbf{x}_{t-1} = \mathbf{s}_{t-1}^{(k)})$, pour $k = 1,\cdots,N$ 
+\item[] $\mathbf{s}_{t-1}^{(k)}$ est issu du précédent échantillonnage.
+\end{itemize}
+
+\subsubsection{Mesure}
+
+La pondération des particules déterminant la probabilité $\pi_t$ est obtenue à partir de la loi d'observation $P(\mathbf{z}_{t+}|\mathbf{x}_{t})$ 
+
+où
+\begin{itemize}
+\item[] $P(\mathbf{z}_{t+}|\mathbf{x}_{t} = \mathbf{s'}_{t}^{(k)})$, pour $k = 1,\cdots,N$
+\item[] $\mathbf{s'}_{t}^{(k)}$ est issu de la prédiction
+\end{itemize}
+   
+
+\subsubsection{Échantillonnage}
+Il s'agit de retrouver un objet $\mathbf{x}$ de densité \textit{a priori} $P(\mathbf{x})$ en utilisant les données observées $\mathbf{z}$ d'une image.
+La densité \textit{a posteriori} est calculée récursivement par échantillonnage pondéré, dont le canevas est le suivant:
+\begin{enumerate}
+\item Soit un vecteur $S_{t-1}$ de $N$ échantillons pris sur l'image $I_{t-1}$,
+$$S_{t-1}=\{ \mathbf{s}_{t-1}^{(i)}, \pi_{t-1}^{(i)}, i=1,\cdots,N\}$$
+\item[] Initialement, les poids $\pi_0^{(i)}$ valent $\frac{1}{N}$ 
+\item $S_t$ est obtenu:
+\item[]\verb+for+ $k=1$ à $N$,
+\begin{enumerate}
+\item[] On sélectionne un échantillon $\mathbf{s}_t^{(k)}$ du vecteur $S_{t-1}$ relativement à son poids $\pi_{t-1}^{(i)}$ issu la probabilité $\pi_{t-1}$
+\end{enumerate}
+\end{enumerate} 
+
+On obtient un vecteur $$S_{t}=\{ \mathbf{s}_{t}^{(i)}, \pi_{t}^{(i)}, i=1,\cdots,N\}$$ où les faibles particules ont été évincées.
+
+
 
 
 \chapter{Résultats expérimentaux}
@@ -742,7 +801,23 @@ sensible au transformations géométriques (changement d'échelle, rotation, dis
 %----------------------------------------------------------------------------------------
 %	Résultats expérimentaux
 %----------------------------------------------------------------------------------------
-
+\begin{enumerate}
+	\item Détection de cible
+	\begin{enumerate}
+		\item Segmentation
+		\item Choisir des points intéressants
+		\item Garder la cible en mémoire
+	\end{enumerate}
+	\item Suivi de cible
+	\begin{enumerate}
+		\item Retrouver les points intéressants
+		\begin{enumerate}
+			\item Choix de candidats selon une distribution
+			\item Election du meilleur candidat (première passe + resampling)
+		\end{enumerate}
+		\item Elimination des points non robustes ou perdus
+	\end{enumerate}
+\end{enumerate}
 
 \chapter{Discussion}
 
