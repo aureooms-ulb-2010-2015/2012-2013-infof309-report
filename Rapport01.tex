@@ -2,7 +2,7 @@
 %	DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,11pt]{report}
 \usepackage[francais]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -490,9 +490,9 @@ $$ \sqrt{\sum_{i=0}^{n}\sum_{j=0}^{n}(a_{i,j} - b_{i,j})^2} $$
 %===================================================================================
 \subsection{Speeded Up Robust Features}
 %===================================================================================
-Le \textit{Speeded Up Robust Features} (SURF) est un algorithme de \textit{détection de caractéristique} présenté par des chercheurs de l'\textit{\'Ecole Polytechnique Fédérale} de Zurich et de l'\textit{Université Catholique de Louvain} pour la première fois en 2006 \cite{t}, puis dans une version révisée en 2008 \cite{u}.
+Le \textit{Speeded Up Robust Features} (SURF) est un algorithme de \textit{détection de caractéristique} présenté par des chercheurs de l'\textit{\'Ecole Polytechnique Fédérale} de Zurich et de l'\textit{Université Catholique de Louvain} pour la première fois en 2006\footnote{Herbert Bay, Tinne Tuytelaars et Luc Van Gool, "\textit{SURF: Speeded Up Robust Features}", dans 9th \textit{European Conference on Computer Vision}, Graz, Autriche, 7-13 mai 2006}, puis dans une version révisée en 2008\footnote{Herbert Bay, Andreas Ess, Tinne Tuytelaars et Luc Van Gool, "\textit{SURF: Speeded Up Robust Features}", \textit{Computer Vision and Image Understanding}, vol. 110, no 3, 2008, p. 346-359}.
 L'objectif de l'algorithme est de rechercher les correspondances entre objets ou scènes présentes dans deux ou plusieurs images distinctes mises en confrontation deux à deux. Il comporte 3 phases. 
-\\Dans un premier temps, l'algorithme recherche des points intéressants de l'image, comme par exemple les points de bords ou les jointures en «T». Ces points doivent être faciles à déterminer, c'est-à-dire, que leurs caractéristiques sont telles que leur détermination doit être toujours reproductible sans ambiguïté. \\ 
+\\Dans un premier temps, l'algorithme recherche des points intéressants de l'image, comme par exemple les points de bords ou les jointures en «T». Ces points doivent être faciles à déterminer, c'est-à-dire, que leurs caractéristiques sont telles que leur détermination doit être toujours reproductible sans ambigüité. \\ 
 Ensuite, l'algorithme associe à chaque point d'intérêt un vecteur caractéristique qui représente un descripteur. Celui-ci, doit être distinct et surtout robuste par rapport au bruit, aux erreurs d'individuation et aux déformations géométriques et photométriques. \\
 Enfin,  l'algorithme compare les descripteurs des deux images. Cette comparaison se base généralement sur la distance entre les vecteurs, par exemple, la distance euclidienne.
 
@@ -502,7 +502,7 @@ Enfin,  l'algorithme compare les descripteurs des deux images. Cette comparaison
 \subsubsection{Image Intégrale}
 L'efficacité de l'algorithme SURF est dû principalement à l'utilisation d'une représentation intermédiaire de l'image connue sous le nom d'\textit{image intégrale}.
 \\L'image intégrale est une image numérique qui est calculée rapidement à partir de l'image originale. On l'utilise pour accélérer le calcul de chaque zone rectangulaire dont le sommet supérieur gauche est à l'origine de l'image. 
-\\Proposée en 1984 \cite{v} comme méthode d'\textit{infographie}, c'est en 2001 qu'elle a été reformulée par la méthode de Viola et Jones \cite{w}, dans le cadre de la \textit{vision par ordinateur}.
+\\Proposée en 1984\footnote{Crow, Franklin (1984). "\textit{Summed-area tables for texture mapping}". SIGGRAPH '84: \textit{Proceedings of the 11th annual conference on Computer graphics and interactive techniques}: 207–212} comme méthode d'\textit{infographie}, c'est en 2001 qu'elle a été reformulée par la méthode de Viola et Jones\footnote{Paul Viola et Michael Jones, \textit{Robust Real-time Object Detection} IJCV 2001}, dans le cadre de la \textit{vision par ordinateur}.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{figure1.png}
@@ -561,7 +561,7 @@ La perte de precision est amplement compensée par une augmentation d'efficacit�
 \\La recherche des maximum locaux dans l'espace à travers les différentes échelles conduit à l'identification des points d'intérêt de l'image.
 %===================================================================================
 \subsubsection{Espace d'échelle}
-La théorie des \textit{espaces d'échelle} (\textit{Scale space theory}) est un model qui est apparu progressivement \cite{x} \cite{y} \cite{z} \cite{aa} dans le domaine de la vision par ordinateur, pour prendre en compte la nature résolument multi-échelles des données images. L'espace d'échelle (\textit{scale-space}) est donc une fonction qui est utilisée pour trouver des points à travers toute les échelles possibles de l'image. Cette fonction est implémentée comme une pyramide dans laquelle l'image en \textit{input} est iterativement convolutée avec un point gaussien, et à maintes reprises redimensionnée. 
+La théorie des \textit{espaces d'échelle} (\textit{Scale space theory}) est un model qui est apparu progressivement\footnote{Witkin, A. P. "\textit{Scale-space filtering}", Proc. 8th Int. Joint Conf. Art. Intell., Karlsruhe, Germany,1019–1022, 1983} \footnote{Koenderink, Jan "\textit{The structure of images}", Biological Cybernetics, 50:363–370, 1984} \footnote{Florack, Luc, "\textit{Image Structure}", Kluwer Academic Publishers, 1997} \footnote{Romeny, Bart ter Haar, "\textit{Front-End Vision and Multi-Scale Image Analysis}", Kluwer Academic Publishers, 2003} dans le domaine de la vision par ordinateur, pour prendre en compte la nature résolument multi-échelles des données images. L'espace d'échelle (\textit{scale-space}) est donc une fonction qui est utilisée pour trouver des points à travers toute les échelles possibles de l'image. Cette fonction est implémentée comme une pyramide dans laquelle l'image en \textit{input} est iterativement convolutée avec un point gaussien, et à maintes reprises redimensionnée. 
 \\\'Etant donné que les coûts de computation des points utilisés par SURF sont invariants par rapport à leurs dimensions, l'espace d'échelle est créé en appliquant des points toujours plus grand à l'image originale. Ceci permet aux différents niveaux de la pyramide de l'espace d'échelle d'être calculés simultanément dans une éventuelle implémentation \textit{multithread}.
 \begin{figure}[ht]
 \centering
@@ -693,7 +693,7 @@ On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation
 \item[L'image] globale au moment $k$ est notée $I_k$, son historique est l'ensemble $$I_{0:n}=\{I_k, k=0,\cdots,n\}$$
 \item[L'objet] est la zone d'intérêt dans l'image dont on souhaite faire le suivi.
 \item[l'état de l'objet] $\mathbf{x}$ au temps $t$ est noté $\mathbf{x}_t$ et son historique est l'ensemble $$\mathcal{X}_{0:t} = \{\mathbf{x}_0,...,\mathbf{x}_t\}$$
-\item[Les observations] sont l'ensemble des \textit{features} (traits \textit{invariants}) aussi dit le \emph{descripteur}  $\mathbf{z}_t$ et son historique $$ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$$
+\item[Les observations] sont l'ensemble des \textit{features} (traits \textit{invariants}) aussi dit \emph{descripteur} ou vecteur de \textit{features} $\mathbf{z}_t$ et son historique $$ \mathcal{Z}_{0:t}=\{\mathbf{z}_0,...,\mathbf{z}_t\}$$
 \item[La dynamique] stochastique de l'objet est entièrement donnée par $$P(\mathbf{x}_t|\mathbf{x}_{t-1})$$ (processus Markovien)
 \item[Les invariants] sont les caractéristiques locales de luminance ou géométrique.
 \end{description}
@@ -844,8 +844,11 @@ On obtient un vecteur $$S_{t}=\{ \mathbf{s}_{t}^{(i)}, \pi_{t}^{(i)}, i=1,\cdots
 %	Résultats expérimentaux
 %----------------------------------------------------------------------------------------
 
-\textit{Condensation} est décrit en utilisant des \textit{splines} pour descripteurs \cite{a}. le choix a été fait de baser le suivi sur des points robustes non mis en relation, à la manière d'un \textit{blob}.
+\section{Différences}
+\textit{Condensation} est présenté avec l'utilisation de \textit{splines} pour descripteurs \cite{condIsard}. Dans ce travail, le choix a été fait de baser le suivi sur des points robustes non mis en relation, à la manière d'un \textit{blob}.
 
+
+\section{Scénario}
 La trame de la solution esquissée par le présent travail se décrit comme suit:
 \begin{enumerate}
 	\item Détection de cible
