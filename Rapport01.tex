@@ -54,7 +54,7 @@ L'analyse logicielle vient de plus en plus appuyer le travail de ceux pour qui l
  
 L'usage de procédés automatisés permet le filtrage et l'analyse massive de données qui était jusqu'alors une tâche fastidieuse à traiter. Données qui une fois traitées permettent d'inférer ou d'appuyer des thèses selon les besoins.
 
-Par exemple, l'analyse des déplacements individuels au sein d'un banc de poissons filmé pendant un longue période est une tache pour laquelle le passage par un traitement informatisé apparaît comme nécessaire.\\
+Par exemple, l'analyse des déplacements individuels au sein d'un banc de poissons filmé pendant un longue période est une tâche pour laquelle le passage par un traitement informatisé apparaît comme nécessaire.\\
 
 Le but de ce projet est d'ébaucher une solution logicielle d'analyse vidéo permettant l'automatisation du travail de détection et de suivi de poissons dans un milieu donné. 
 
@@ -89,7 +89,7 @@ Une vidéo est un flux, une succession d'images, dites  \textit{frames}. Le flux
 
 Suivre une cible au long d'une séquence d'images, c'est définir et reconnaître une partie de l'image courante comme identique à la précédente, tout en lui autorisant des modifications (taille, position, couleur,...). Rétroactivement, c'est aussi reconstruire la trajectoire d'une cible dans la séquence d'images, cette approche se montrera pertinente pour la suite.\\
 
-Le \textit{video tracking} ou suivi de cibles au sein d'une vidéo est le suivi de morceaux ciblés d'images au travers du flux duquel elles proviennent. C'est la tache automatisée qui consiste en la localisation, d'images en images, d'un groupe de pixels généralement en mouvement. \\
+Le \textit{video tracking} ou suivi de cibles au sein d'une vidéo est le suivi de morceaux ciblés d'images au travers du flux duquel elles proviennent. C'est la tâche automatisée qui consiste en la localisation, d'images en images, d'un groupe de pixels généralement en mouvement. \\
 
 Si une cible apparait à l'oeil humain comme consistante alors qu'elle se meut dans son champs de vision, il en va tout autrement en \textit{computer vision}. En effet, à tout instant la consistance conférant son unité à la cible doit être déterminée, calculée et éprouvée pour qu'elle soit reconnue. 
 
@@ -229,7 +229,7 @@ De façon générale, pour outrepasser la pollution issue d'éléments parasites
 %\item La déformation due à la distance par rapport à l’objectif.
 %\end{itemize}
 \subsection{Luma, luminance et niveau de gris}
-La plus part des algorithmes de traitement d'images fonctionnent à partir d'images couleurs transformées en niveau de gris, c'est-à-dire ne considérant que l'intensité lumineuse de l'image.\\
+La plupart des algorithmes de traitement d'images fonctionnent à partir d'images couleurs transformées en niveau de gris, c'est-à-dire ne considérant que l'intensité lumineuse de l'image.\\
  
 La lumière dénuée de couleurs est dite monochromatique ou achromatique. L'unique attribut d'une telle lumière est son intensité. L'image en \textit{niveau de gris} représente alors l'intensité achromatique de l'image.\\ 
 
@@ -262,7 +262,7 @@ où
 \item[$R'$,$G'$,$B'$] sont les composantes RGB après correction gamma.\\
 \end{description}
 
-Les coefficients permettent de se rapprocher au mieux de la perception humaine des couleurs. On voit en particulier que, dans la perception humaine de l'intensité lumineuse, le vert intervient sensiblement plus contrairement au bleu.
+Les coefficients permettent de se rapprocher au mieux de la perception humaine des couleurs. On voit en particulier que, dans la perception humaine de l'intensité lumineuse, le vert intervient sensiblement plus, contrairement au bleu.
 
 Ces coefficients sont déterminés relativement au support d'affichage et sont précisés dans des recommandations. 
 
@@ -346,7 +346,7 @@ Il existe plusieurs d'implémenter cet algorithme, parmi les plus communes:
 \item par inondation, où est simulé une montée progressive du niveau d'eau à partir des minima du relief.\\
 \end{itemize}
 
-La segmentation par ligne de partage des eaux donne de bons résultats dans l'extraction d'objet presque uniforme, mais conduit souvent à une sur-segmentation dû aux bruits et irrégularités locales. Une façon de pallier à ce désavantage est d'utiliser des marqueurs. Les marqueurs sont définis comme des composantes connexes appartenant soit à un objet d'avant-plan, soit au fond. La sélection des marqueurs à garder pourra être effectuée par simple estimation du niveau de gris et de la connectivité ou par une   
+La segmentation par ligne de partage des eaux donne de bons résultats dans l'extraction d'objet presque uniforme, mais conduit souvent à une sur-segmentation dû aux bruits et irrégularités locales. Une façon de pallier à ce désavantage est d'utiliser des marqueurs. Les marqueurs sont définis comme des composantes connexes appartenant soit à un objet d'avant-plan, soit au fond. La sélection des marqueurs à garder pourra être effectuée par simple estimation du niveau de gris et de la connectivité.%   
 
 
 \subsubsection{Détection de contours}
@@ -386,10 +386,10 @@ Par exemple, une région pourrait être représentée par ses frontières et cel
 Cette étape met en place un système de représentation des données en vue de les analyser. Autrement dit, on crée un système qui va compacter les données en des représentations utiles pour effectuer des calculs sur les descripteurs.\\
 
 Le choix de ces traits est laissé libre, ils seront choisis relativement à la façon dont sera entrevue l'analyse des données. Par contre il est impératif que les traits caractéristiques forment des descripteur insensibles aux variations géométriques (homothétie, translation, rotation) ou photométriques (intensité).   
-\subsubsection{Good feature to track}
+\subsubsection{Good features to track}
 Les «bons» traits à suivre sont ceux dont le mouvement peut être estimé de manière fiable.\\
 
-J. Shi et C. Tomasi ont présenté\footnote{IEEE Conference on Computer Vision and Pattern Recognition (CVPR94) Seattle, June 1994} en 1994 leurs travaux sous l'intitulé \textit{Good Feature to Track}, l'article fait toujours autorité sur le sujet. 
+J. Shi et C. Tomasi ont présenté\footnote{IEEE Conference on Computer Vision and Pattern Recognition (CVPR94) Seattle, June 1994} en 1994 leurs travaux sous l'intitulé \textit{Good Features to Track}, l'article fait toujours autorité sur le sujet. 
 
 Ils partent de l'évidence simple qu'aucun système de vision basée sur des traits d'intérêts ne peut fonctionner sans que des bons traits caractéristiques et robustes n'aient pu être préalablement identifiés. 
 
@@ -415,7 +415,7 @@ Un coin est un point intersection d'au moins deux arêtes de sens opposé.\\
 Le \textit{Harris corner detector} est une méthode de détection de coins (traits d'intérêt) reconnu pour sa relative robustesse face aux bruits, aux variations de luminosité et aux variations géométriques. \\
 
 L'algorithme, décrit par Harris et Stephens, fonctionne sur l'évaluation d'une fonction d'\textit{auto-corrélation} appliquée localement. 
-En mathématique, l'auto-corrélation c'est corrélation croisée du signal par lui-même, cela permet de détecter des régularités, des motifs répétés au sein d'un signal.   
+L'auto-corrélation c'est la corrélation croisée du signal par lui-même, cela permet de détecter des régularités, des motifs répétés au sein d'un signal.   
 
 La fonction d'auto-corrélation, décrite par \cite{q} comme l'erreur quadratique moyenne (\textit{sum of squared differences}), mesure les changements locaux dûs à l'application d'un léger décalage dans chaque direction.\\
 $$
@@ -537,7 +537,7 @@ H(f(x,y))=
 $$
 Le déterminant de cette matrice est calculé de la façon suivante :
 $$\left|H(f(x,y))\right|=\frac{\partial^2 f(x,y)}{\partial x^2} \frac{\partial^2 f(x,y)}{\partial y^2} - \left(\frac{\partial^2 f(x,y)}{\partial x \partial y}\right)^2 $$
-Ce déterminant est utilisé pour trouver le maximum et le minimum de la fonction à travers le test du hessien des dérivées secondes. En appliquent le test, il est alors possible de savoir si un point $(x,y)$ est un extremum locale pour la fonction $f$.\\
+Ce déterminant est utilisé pour trouver le maximum et le minimum de la fonction à travers le test du hessien des dérivées secondes. En appliquant le test, il est alors possible de savoir si un point $(x,y)$ est un extremum local pour la fonction $f$.\\
 Les dérivées partielles secondes sont calculées en utilisant un \textit{filtre gaussien normalisé du second ordre}, qui permet une analyse à plusieurs échelles et dans l'espace. Grâce à ce calcul, il est possible de déterminer les points du filtre en $x$, $y$ et $xy$ et de calculer les quatre termes de la matrice. L'utilisation de la gaussienne permet en outre, de faire varier l'effet de lissage durant la phase de convolution de façon à permettre le calcul du déterminant à différentes échelles.
 \\\'Etant donné que la gaussienne est une fonction \textit{isotrope} (c'est-à-dire à symétrie circulaire), la convolution avec le point est invariant à la rotation. Il est alors possible de calculer la matrice hessienne comme fonction du point $\mathsf{x}=(x,y)$ et de l'échelle $\sigma$.
 $$
@@ -562,7 +562,7 @@ La perte de precision est amplement compensée par une augmentation d'efficacit�
 %===================================================================================
 \subsubsection{Espace d'échelle}
 La théorie des \textit{espaces d'échelle} (\textit{Scale space theory}) est un model qui est apparu progressivement\footnote{Witkin, A. P. "\textit{Scale-space filtering}", Proc. 8th Int. Joint Conf. Art. Intell., Karlsruhe, Germany,1019–1022, 1983} \footnote{Koenderink, Jan "\textit{The structure of images}", Biological Cybernetics, 50:363–370, 1984} \footnote{Florack, Luc, "\textit{Image Structure}", Kluwer Academic Publishers, 1997} \footnote{Romeny, Bart ter Haar, "\textit{Front-End Vision and Multi-Scale Image Analysis}", Kluwer Academic Publishers, 2003} dans le domaine de la vision par ordinateur, pour prendre en compte la nature résolument multi-échelles des données images. L'espace d'échelle (\textit{scale-space}) est donc une fonction qui est utilisée pour trouver des points à travers toute les échelles possibles de l'image. Cette fonction est implémentée comme une pyramide dans laquelle l'image en \textit{input} est iterativement convolutée avec un point gaussien, et à maintes reprises redimensionnée. 
-\\\'Etant donné que les coûts de computation des points utilisés par SURF sont invariants par rapport à leurs dimensions, l'espace d'échelle est créé en appliquant des points toujours plus grand à l'image originale. Ceci permet aux différents niveaux de la pyramide de l'espace d'échelle d'être calculés simultanément dans une éventuelle implémentation \textit{multithread}.
+\\\'Etant donné que les coûts de computation des points utilisés par SURF sont invariants par rapport à leurs dimensions, l'espace d'échelle est créé en appliquant des points toujours plus grands à l'image originale. Ceci permet aux différents niveaux de la pyramide de l'espace d'échelle d'être calculés simultanément dans une éventuelle implémentation \textit{multithread}.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{figure4.png}
@@ -570,7 +570,7 @@ La théorie des \textit{espaces d'échelle} (\textit{Scale space theory}) est un
 \label{fig4}
 \end{figure}
 \\La figure~\ref{fig4} montre l'espace d'échelle utilisée par SURF. Seul le filtre varie, contrairement à l'image originale qui reste invariante.
-\\ Dans SURF, le niveau plus bas d'espace d'échelle est obtenu en appliquant des filtre $9\times9$ comme ceux de la figure~\ref{fig3}. Ces filtres correspondent à une gaussienne avec un écart type $\sigma$ qui vaut 1,2. Les niveaux successifs sont obtenus en incrémentant les filtres de bases et en conservant les proportions (figure~\ref{fig5}).
+\\ Dans SURF, le niveau le plus bas d'espace d'échelle est obtenu en appliquant des filtre $9\times9$ comme ceux de la figure~\ref{fig3}. Ces filtres correspondent à une gaussienne avec un écart type $\sigma$ qui vaut 1,2. Les niveaux successifs sont obtenus en incrémentant les filtres de bases et en conservant les proportions (figure~\ref{fig5}).
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{figure5.png}
@@ -582,7 +582,7 @@ $$\sigma_{approx}=CurrentFilterSize.\frac{BaseFilterScale}{BaseFilterSize}=Curre
 %===================================================================================
 \subsubsection{Localisation des points d'intérêts}
 Le processus de détermination de l'échelle qui permet de trouver les points d'intérêt d'une image se divise en 3 partie. Dans un premier temps, on applique un filtre avec un seuil pour faire en sorte d'éliminer les valeurs trop petites (en augmentant ce seuil le nombre de points diminue).
-\\Successivement, on applique une \textit{suppression non-maximale} pour pouvoir trouver un ensemble de points candidats. Chaque pixel de l'espace d'échelle est confronté avec ses 26 points voisins, y compris les 8 points de l'échelle native et les 9 de chaque échelle supérieur et inférieur (figure~\ref{fig6}). Le pixel est un maximum s'il a une valeur supérieur à celle des pixels qui l'entourent à son échelle, à l'échelle supérieur et à celle inférieur. Si cette valeur est inférieur, il s'agit d'un minimum. \`A cette étape on dispose donc d'un ensemble de points d'intérêt filtrés qui sont soit un minimum, soit un maximum dans l'espace d'échelle.
+\\Successivement, on applique une \textit{suppression non-maximale} pour pouvoir trouver un ensemble de points candidats. Chaque pixel de l'espace d'échelle est confronté avec ses 26 points voisins, y compris les 8 points de l'échelle native et les 9 de chaque échelle supérieure et inférieure (figure~\ref{fig6}). Le pixel est un maximum s'il a une valeur supérieure à celle des pixels qui l'entourent à son échelle, à l'échelle supérieure et à celle inférieure. Si cette valeur est inférieure, il s'agit d'un minimum. \`A cette étape on dispose donc d'un ensemble de points d'intérêt filtrés qui sont soit un minimum, soit un maximum dans l'espace d'échelle.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{figure6.png}
@@ -604,7 +604,7 @@ Les \textit{descripteurs} SURF décrivent la distribution des intensités des pi
 \\L'extraction des  descripteurs se divise en 2 phases. Tout d'abord pour chaque point d'intérêt on détermine une orientation, ensuite on construit une fenêtre centrée sur le point, dont la dimension dépend de l'échelle à laquelle le point d'intérêt a été trouvé. \`A partir de cette zone, et avec l'utilisation conjointe des filtres Haar et de l'image intégrale, on extrait un vecteur de 64 composantes.
 %===================================================================================
 \subsubsection{Composantes du descripteur}
-Le premier pas dans l'extraction des descripteurs SURF consiste à construire une fenêtre carrée centrée au point d'intérêt. Cette fenêtre contient les pixels qui produiront le descripteur. Sa dimension est de $20\sigma$, avec $\sigma$ l'échelle à laquelle le point d'intérêt a été trouvé. La fenêtre est orientée de façon concorde à l'orientation du point.
+Le premier pas dans l'extraction des descripteurs SURF consiste à construire une fenêtre carrée centrée au point d'intérêt. Cette fenêtre contient les pixels qui produiront le descripteur. Sa dimension est de $20\sigma$, avec $\sigma$ l'échelle à laquelle le point d'intérêt a été trouvé. La fenêtre est orientée de façon à ce qu'elle concorde à l'orientation du point.
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.3]{figure8.png}
@@ -635,7 +635,7 @@ Suite à ce qui a été énoncé, il est intéressant de dégager quelques exige
 \section{Segmentation, traits d'intérêt et comparaison}
 En liaison à l'implémentation de l'algorithme \textit{condensation}, différentes procédures, telles que décrites dans le chapitre précédent, ont été réalisées.\\
 
-L'algorithme \textit{condensation}, qui effectue la principale tache du suivi de cibles, reste ouvert sur les traitements annexes possibles quant au contexte dans lequel il s'effectue. 
+L'algorithme \textit{condensation}, qui effectue la principale tâche du suivi de cibles, reste ouvert sur les traitements annexes possibles quant au contexte dans lequel il s'effectue. 
 
 Entre autres, les choix et les procédés d'extraction des traits d'intérêts, ainsi que la méthode d'estimation de la correspondance entre prédiction et observations, peuvent être réalisés de différentes façons.\\
 
@@ -673,7 +673,7 @@ Un des objectifs de la méthode est d'approcher l'hypothétique détermination r
 
 Autrement dit, la méthode devrait être en mesure de mettre en exergue le tout ou une partie de la cible comme n'appartenant pas au \emph{bruit}.\\
 
-Le processus de détermination se base sur un mouvement cyclique. Partant d'un modèle donné dont la paramétrisation est issue d'observations antérieurs, on consolide ce modèle en évaluant sa pertinence à l'état présent. Ce mouvement conduit à une prédiction sur l'état probable à l'étape suivante.\\ 
+Le processus de détermination se base sur un mouvement cyclique. Partant d'un modèle donné dont la paramétrisation est issue d'observations antérieures, on consolide ce modèle en évaluant sa pertinence à l'état présent. Ce mouvement conduit à une prédiction sur l'état probable à l'étape suivante.\\ 
 
 On distingue alors deux phases, la \textit{prédiction} et l'\textit{observation}. 
 \begin{description}
@@ -704,7 +704,7 @@ L'algorithme \textit{condensation} appartient à la classe des filtres particula
 Les filtres à particules, aussi appelé méthodes  de Monte-Carlo séquentielles, s'appuient sur des méthodes statistiques. Ils ont pour dessein l'estimation de l'état d'un système donné et qui n'est pas toujours directement observable.
 \textit{Condensation} contient en plus une approche bayésienne dans son processus d'approximation de l'état à calculer.\\
 
-L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème. Cette discrétisation a pour effet d'augmenter la complexité de la recherche de solutions. Les techniques et optimisations probabilistes simplifie cette recherche de solutions.
+L'intérêt des méthodes de Monte-Carlo survient lorsque les méthodes numériques nécessitent une discrétisation de l'espace du problème. Cette discrétisation a pour effet d'augmenter la complexité de la recherche de solutions. Les techniques et optimisations probabilistes simplifient cette recherche de solutions.
 
 Les méthodes Monte-Carlo dites séquentielles sont fondées sur des simulations numériques facilitant aussi le calcul d'une distribution a posteriori. La discrétisation de l'espace des possibles est alors comme borné par une densité donnée.\\
 
@@ -745,7 +745,7 @@ La dynamique future de l'objet ne dépend pas de la séquence passée, mais uniq
 
 
 \subsection{Approche bayésienne}
-La règle de Bayes est:
+Le théorème de Bayes est:
 
 $$P(A_i|B) = \frac{P(B | A_i) P(A_i)}{\sum_j P(B|A_j)P(A_j)}$$
 
@@ -821,7 +821,7 @@ où
 
 \subsubsection{Échantillonnage}
 Il s'agit de retrouver un objet $\mathbf{x}$ de densité \textit{a priori} $P(\mathbf{x})$ en utilisant les données observées $\mathbf{z}$ d'une image.
-La densité \textit{a posteriori} est calculée récursivement par échantillonnage pondéré, dont le canevas est le suivant:
+La densité \textit{a posteriori} est calculée récursivement par échantillonnage pondéré dont le canevas est le suivant:
 \begin{enumerate}
 \item Soit un vecteur $S_{t-1}$ de $N$ échantillons pris sur l'image $I_{t-1}$,
 $$S_{t-1}=\{ \mathbf{s}_{t-1}^{(i)}, \pi_{t-1}^{(i)}, i=1,\cdots,N\}$$
@@ -845,10 +845,14 @@ On obtient un vecteur $$S_{t}=\{ \mathbf{s}_{t}^{(i)}, \pi_{t}^{(i)}, i=1,\cdots
 %----------------------------------------------------------------------------------------
 
 \section{Différences}
-\textit{Condensation} est présenté avec l'utilisation de \textit{splines} pour descripteurs \cite{condIsard}. Dans ce travail, le choix a été fait de baser le suivi sur des points robustes non mis en relation, à la manière d'un \textit{blob}.
+La réalisation présentée à l'issue du projet se différencie de l'approche proposée par les auteurs M. Isard et B. Andrew, en un certain nombre de points:
+\begin{enumerate}
+\item \textit{Condensation} est présenté avec l'utilisation de \textit{splines} pour descripteurs \cite{condIsard}. Dans ce travail, le choix a été fait de baser le suivi de cible sur des points robustes non mis en relation, à la manière d'un \textit{blob}.
+\item La problématique du suivi de poissons à orienté l'implémentation vers une solution potentiellement multi-cibles.
+\end{enumerate}
 
 
-\section{Scénario}
+\section{Scénario de solution logicielle}
 La trame de la solution esquissée par le présent travail se décrit comme suit:
 \begin{enumerate}
 	\item Détection de cible
@@ -859,34 +863,90 @@ La trame de la solution esquissée par le présent travail se décrit comme suit
 	\end{enumerate}
 	\item Suivi de cible
 	\begin{enumerate}
-		\item Identification des points intéressants
+		\item Identification des traits d'intérêt
 		\begin{enumerate}
 			\item Choix de candidats selon une distribution
 			\item Élection du meilleur candidat: première passe et ré-échantillonnage
 		\end{enumerate}
-		\item Élimination des points non robustes ou perdus
+		\item Élimination des traits non robustes ou perdus\\
 	\end{enumerate}
 \end{enumerate}
 
+L'application commence par segmenter l'image et y détecter des cibles, elle ne retournera à cette étape de segmentation que sous la condition d'avoir perdu un certain nombre de traits d'intérêt (seuil). 
 
+Les cibles détectées, commence la phase de suivi dans laquelle la procédure cycle autant que possible.
+
+De cette façon, l'application alterne des phases de recherche de cibles et de suivi de cibles.\\
+ 
+
+\section{Le logiciel}
+
+\subsection{Aperçu}
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.18]{screenshots/condensate3Cut.png}
+\caption{aperçu de l'application ConDensAte}
+\label{fig:aperçu}
+\end{figure}
+
+Le logiciel (\ref{fig:aperçu}) se compose d'une fenêtre principale au sein de laquelle peut être lu un flux vidéo provenant:
+\begin{itemize}
+\item d'un fichier.
+\item d'une caméra locale ou usb.
+\item d'une caméra en réseau (\ref{fig:camera}).
+\end{itemize}
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.5]{screenshots/condensate14.png}
-\caption{Condensate}
+\includegraphics[scale=0.3]{screenshots/condensate4.png}
+\caption{Connection à une caméra en réseau}
+\label{fig:camera}
 \end{figure}
 
-\begin{figure}[hbtp]
+En vue de répondre adéquatement, au diverses qualités et résolutions de vidéo, l'application propose de pouvoir paramétrer (\ref{fig:paramétrisation}) les différentes étapes de l'algorithme et de sauvegarder ces réglages au format XML.
+
+\begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{screenshots/condensate24.png}
-\caption{Condensate}
+\includegraphics[scale=0.3]{screenshots/condensate5.png}
+\caption{Paramétrisation}
+\label{fig:paramétrisation}
 \end{figure}
 
+\pagebreak
+\subsection{En action}
 
-\chapter{Discussion}
-%----------------------------------------------------------------------------------------
-%	Discussion
-%----------------------------------------------------------------------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{screenshots/condensate24.png}
+\caption{ConDensAte: Recherche de cibles}
+\label{SegmentationCible}
+\end{figure}
+
+\paragraph{Détection de cibles}
+L'application segmente l'image afin de cerner les régions potentiellement intéressantes (figure \ref{SegmentationCible} cadre vert). 
+
+Cette segmentation, par différentiation des objets en mouvement et réalisée en utilisant un masque binaire, débouche sur une détection des contours de la cible éventuelle (figure \ref{SegmentationCible}, trait blanc). 
+
+Au sein des contours, la recherche et l'extraction des traits d'intérêt, selon les recommandations de Shi et Tomasi \cite{o}, est effectuée. Un vecteur contenant les traits d'intérêt est alors créé.\\ 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{screenshots/condensate14.png}
+\caption{ConDensAte: Suivi de cibles}
+\label{SuiviCible}
+\end{figure}
+
+\paragraph{Suivi de cibles}
+À partir du vecteur de traits d'intérêts, pour chacun d'eux, l'application va établir des prédictions suivant une distribution donnée. 
+
+Sur la figure \ref{SuiviCible}, les points rouges représentent les particules de la prédiction courante, les points verts les traits de la prédiction précédente qui ont satisfont au mieux la correspondance avec les traits d'intérêts initiaux.\\
+
+\subsection{Code source}
+
+L'application et le code source sont téléchargeables à l'adresse:
+ \begin{center}
+ \url{www.webresearch.be/fishtube}
+ \end{center}   
 
 
 \chapter{Conclusion et perspectives}
@@ -894,8 +954,11 @@ La trame de la solution esquissée par le présent travail se décrit comme suit
 %----------------------------------------------------------------------------------------
 %	Conclusion et perspectives
 %----------------------------------------------------------------------------------------
+L'application donne des résultats, dans une certaine mesure, satisfaisants. Mais l'implémentation telle que réalisée peut être largement améliorée.\\
 
+Le algorithmes annexes (segmentation, vraisemblance, détection de \textit{features}) qui ont été utilisé ne sont pas forcément ceux qui donnent les résultats les plus précis.\\ 
 
+Par exemple, il aurait été intéressant d'intégrer la puissance de l'algorithme SURF, ce qui aurait permis d'ajouter à la détection et au suivi de cibles, la reconnaissance du type de cibles selon des \textit{templates} données.
 
 \bibliographystyle{apalike}
 \bibliography{biblio}
